@@ -1,0 +1,142 @@
+
+.board{
+    height:80vh;
+    width:65vw;
+    margin:auto 2.5vw;
+    display:flex;
+    justify-content:space-evenly;
+    align-items:center;
+}
+
+.flipperContainer{
+    
+    width:175px;
+    height:250px;
+    // height:auto;
+    // width:auto;
+    perspective:1000px;
+   
+}
+
+ .flipCard{
+    transform-style:preserve-3d;
+    position:absolute;
+
+    width:175px;
+    height:250px;
+    border-radius:10px;
+        
+    &::before, &::after{
+        content: '';
+        position: absolute;
+        z-index: -1;
+        display:block;
+
+        border-radius:10px;
+        
+    }
+    &::before{
+            width: 175px;
+            height: 130px;
+            box-shadow: 0px 0px 5px 5px grey;
+    }
+        
+    &::after{
+        box-shadow: 0px 0px 10px 8px black;
+        width: 170px;
+        height: 125px;
+        bottom:0px;
+        left:2px;
+    }
+}
+
+.rollLeft, .rollRight{
+    position:absolute;
+    bottom:calc(50% - 25px);
+
+    width:10%;
+    height:50px;
+    border:1px #2d2d2d solid;
+    border-radius:6px;
+
+    background-image:linear-gradient(#000,#3d3d3d,silver,#3d3d3d,#000);
+    
+    &__top{
+        bottom:-28px;
+    }
+
+    &__bottom{
+        top:-28px;
+    }
+}
+.rollLeft{
+    left:1px;
+}
+.rollRight{
+    right: 1px;
+}
+
+.halfCard{
+    position:absolute;
+
+    box-sizing:border-box;
+    width:175px;
+    height:125px;
+    backface-visibility:hidden;
+    overflow:hidden;
+
+    text-align:center;
+    font-size:200px;
+    color:white;
+
+    span{
+        position:absolute;
+        left:0;
+
+        width:175px;
+        height:125px;
+        }
+}
+
+.topCard{
+    transition: all .15s linear;
+
+    &,&__back{
+        background-image:linear-gradient(#7d7d7d,#4d4d4d,#0d0d0d);
+        border-bottom:1px black solid;
+        border-top:2px #b2b2b2 solid;
+        border-top-left-radius:7px;
+        border-top-right-radius:7px;
+        transform-origin: bottom center;
+    }
+}
+
+.bottomCard{
+    &,&__back{
+        top:125px;
+        background-image:linear-gradient(#1d1d1d,#3d3d3d,#0d0d0d);
+        border-top:1px black solid;
+        border-bottom-left-radius:7px;
+        border-bottom-right-radius:7px;
+        span{
+            top:-125px;  
+
+            transform-origin:bottom center;
+        }
+    }
+    &__back{
+        transform:rotateX(90deg);
+        transform-origin:top center;
+        transition:all .15s linear .15s;
+    }
+}
+
+
+.flipCard:hover .bottomCard__back{
+  transform:rotateX(0deg);
+  border-top:transparent;
+}
+.flipCard:hover .topCard{
+  transform:rotateX(-90deg);
+  border-bottom:transparent;
+}
