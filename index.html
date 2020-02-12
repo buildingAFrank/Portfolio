@@ -3,19 +3,101 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="/scss/style.css">
+    <link rel="stylesheet" href="css/style.css">
     <title>FX</title>
 </head>
 <body>
     <nav class="navigation">
-        <ul>
-            <div>Accueil</div>
-            <div>Apercu</div>
-            <div>Design</div>
-            <div>Audio-visuelle</div>
-            <div>Jeux</div>
-            <div>Prototype</div>
-            <div>Contact</div>
+        <ul class="nav-menu">
+            <div class='item-menu'>
+                <!-- Accueil -->
+                <div class="menu-option">
+                    <div class="halfCardMenu tophalf__back"><span>Accueil</span></div>
+                    <div class="halfCardMenu bottomhalf"><span>Accueil</span></div>
+                    <div class="halfCardMenu tophalf"><span>Accueil</span></div>
+                    <div class="halfCardMenu bottomhalf__back"><span>Accueil</span></div>
+                    <div class="menuRoll__left"></div>
+                    <div class="menuRoll__right"></div>
+                </div>
+            </div>
+            <div class='item-menu'>
+                <!-- Apercu -->
+                <div class="menu-option">
+                    <div class="halfCardMenu tophalf__back"><span>Apercu</span></div>
+                    <div class="halfCardMenu bottomhalf"><span>Apercu</span></div>
+                    <div class="halfCardMenu tophalf"><span>Apercu</span></div>
+                    <div class="halfCardMenu bottomhalf__back"><span>Apercu</span></div>
+                    <div class="menuRoll__left"></div>
+                    <div class="menuRoll__right"></div>
+                </div>
+            </div>
+            <div class='item-menu'>
+                <!-- Design -->
+                <div class="menu-option">
+                    <div class="halfCardMenu tophalf__back"><span>Design</span></div>
+                    <div class="halfCardMenu bottomhalf"><span>Design</span></div>
+                    <div class="halfCardMenu tophalf"><span>Design</span></div>
+                    <div class="halfCardMenu bottomhalf__back"><span>Design</span></div>
+                    <div class="menuRoll__left"></div>
+                    <div class="menuRoll__right"></div>
+                </div>
+            </div>
+            <div class='item-menu'>
+                <!-- Audio-visuelle -->
+                <div class="menu-option">
+                    <div class="halfCardMenu tophalf__back"><span></span></div>
+                    <div class="halfCardMenu bottomhalf"><span></span></div>
+                    <div class="halfCardMenu tophalf"><span></span></div>
+                    <div class="halfCardMenu bottomhalf__back"><span></span></div>
+                    <div class="menuRoll__left"></div>
+                    <div class="menuRoll__right"></div>
+                </div>
+            </div>
+            <div class='item-menu'>
+                <!-- Jeux -->
+                <div class="menu-option">
+                    <div class="halfCardMenu tophalf__back"><span></span></div>
+                    <div class="halfCardMenu bottomhalf"><span></span></div>
+                    <div class="halfCardMenu tophalf"><span></span></div>
+                    <div class="halfCardMenu bottomhalf__back"><span></span></div>
+                    <div class="menuRoll__left"></div>
+                    <div class="menuRoll__right"></div>
+                </div>
+            </div>
+            <div class='item-menu'>
+                <!-- Prototype -->
+                <div class="menu-option">
+                    <div class="halfCardMenu tophalf__back"><span></span></div>
+                    <div class="halfCardMenu bottomhalf"><span></span></div>
+                    <div class="halfCardMenu tophalf"><span></span></div>
+                    <div class="halfCardMenu bottomhalf__back"><span></span></div>
+                    <div class="menuRoll__left"></div>
+                    <div class="menuRoll__right"></div>
+                </div>
+            </div>
+            <div class='item-menu'>
+                <!-- Contact -->
+                <div class="menu-option">
+                    <div class="halfCardMenu tophalf__back">
+                        <span>Contact</span>
+                    </div>
+                    <div class="halfCardMenu bottomhalf">
+                        <span>Contact</span>
+                    </div>
+                    <div class="halfCardMenu tophalf">
+                        <span>Contact</span>
+                        <div class="menuRoll__left menuRoll__left__top"></div>
+                        <div class="menuRoll__right menuRoll__right__top"></div>
+                    </div>
+                    <div class="halfCardMenu bottomhalf__back">
+                        <div class="menuRoll__left menuRoll__left__bottom"></div>
+                        <div class="menuRoll__right menuRoll__right__bottom"></div>
+                        <span>Contact</span>
+                    </div>
+                    <div class="menuRoll__left"></div>
+                    <div class="menuRoll__right"></div>
+                </div>
+            </div>
         </ul>
     </nav>
     <div class="board">
@@ -41,28 +123,6 @@
                 <div class="rollRight"></div>
             </div>
         </div>
-        <div class="flipperContainer">
-            <div class='flipCard'> <!-- flip card inner -->
-                <div class="halfCard topCard__back">
-                    <span> 4</span>
-                </div>
-                <div class='halfCard bottomCard'>
-                    <span>3</span>
-                </div>
-                <div class='halfCard topCard'>
-                    <span>3</span>
-                    <div class="rollLeft rollLeft__top"></div>
-                    <div class="rollRight rollRight__top"></div>
-                </div>
-                <div class="halfCard bottomCard__back">
-                    <div class="rollLeft rollLeft__bottom"></div>
-                    <div class="rollRight rollRight__bottom"></div>
-                    <span>4</span>
-                </div>
-                <div class="rollLeft"></div>
-                <div class="rollRight"></div>
-        </div>
-        </div>
         <div class="flipperContainer"> <!-- flip card -->
             <div class='flipCard'> <!-- flip card inner -->
                 <div class="halfCard topCard__back">
@@ -84,30 +144,238 @@
                 <div class="rollLeft"></div>
                 <div class="rollRight"></div>
             </div>
-        </div>
-        <div class="flipperContainer">
+        </div><div class="flipperContainer"> <!-- flip card -->
             <div class='flipCard'> <!-- flip card inner -->
                 <div class="halfCard topCard__back">
-                    <span> 4</span>
+                    <span> 2</span>
                 </div>
                 <div class='halfCard bottomCard'>
-                    <span>3</span>
+                    <span>1</span>
                 </div>
                 <div class='halfCard topCard'>
-                    <span>3</span>
+                    <span>1</span>
                     <div class="rollLeft rollLeft__top"></div>
                     <div class="rollRight rollRight__top"></div>
                 </div>
                 <div class="halfCard bottomCard__back">
                     <div class="rollLeft rollLeft__bottom"></div>
                     <div class="rollRight rollRight__bottom"></div>
-                    <span>4</span>
+                    <span>2</span>
                 </div>
                 <div class="rollLeft"></div>
                 <div class="rollRight"></div>
-        </div>
-        </div>
-        <div class="flipperContainer"> <!-- flip card -->
+            </div>
+        </div><div class="flipperContainer"> <!-- flip card -->
+            <div class='flipCard'> <!-- flip card inner -->
+                <div class="halfCard topCard__back">
+                    <span> 2</span>
+                </div>
+                <div class='halfCard bottomCard'>
+                    <span>1</span>
+                </div>
+                <div class='halfCard topCard'>
+                    <span>1</span>
+                    <div class="rollLeft rollLeft__top"></div>
+                    <div class="rollRight rollRight__top"></div>
+                </div>
+                <div class="halfCard bottomCard__back">
+                    <div class="rollLeft rollLeft__bottom"></div>
+                    <div class="rollRight rollRight__bottom"></div>
+                    <span>2</span>
+                </div>
+                <div class="rollLeft"></div>
+                <div class="rollRight"></div>
+            </div>
+        </div><div class="flipperContainer"> <!-- flip card -->
+            <div class='flipCard'> <!-- flip card inner -->
+                <div class="halfCard topCard__back">
+                    <span> 2</span>
+                </div>
+                <div class='halfCard bottomCard'>
+                    <span>1</span>
+                </div>
+                <div class='halfCard topCard'>
+                    <span>1</span>
+                    <div class="rollLeft rollLeft__top"></div>
+                    <div class="rollRight rollRight__top"></div>
+                </div>
+                <div class="halfCard bottomCard__back">
+                    <div class="rollLeft rollLeft__bottom"></div>
+                    <div class="rollRight rollRight__bottom"></div>
+                    <span>2</span>
+                </div>
+                <div class="rollLeft"></div>
+                <div class="rollRight"></div>
+            </div>
+        </div><div class="flipperContainer"> <!-- flip card -->
+            <div class='flipCard'> <!-- flip card inner -->
+                <div class="halfCard topCard__back">
+                    <span> 2</span>
+                </div>
+                <div class='halfCard bottomCard'>
+                    <span>1</span>
+                </div>
+                <div class='halfCard topCard'>
+                    <span>1</span>
+                    <div class="rollLeft rollLeft__top"></div>
+                    <div class="rollRight rollRight__top"></div>
+                </div>
+                <div class="halfCard bottomCard__back">
+                    <div class="rollLeft rollLeft__bottom"></div>
+                    <div class="rollRight rollRight__bottom"></div>
+                    <span>2</span>
+                </div>
+                <div class="rollLeft"></div>
+                <div class="rollRight"></div>
+            </div>
+        </div><div class="flipperContainer"> <!-- flip card -->
+            <div class='flipCard'> <!-- flip card inner -->
+                <div class="halfCard topCard__back">
+                    <span> 2</span>
+                </div>
+                <div class='halfCard bottomCard'>
+                    <span>1</span>
+                </div>
+                <div class='halfCard topCard'>
+                    <span>1</span>
+                    <div class="rollLeft rollLeft__top"></div>
+                    <div class="rollRight rollRight__top"></div>
+                </div>
+                <div class="halfCard bottomCard__back">
+                    <div class="rollLeft rollLeft__bottom"></div>
+                    <div class="rollRight rollRight__bottom"></div>
+                    <span>2</span>
+                </div>
+                <div class="rollLeft"></div>
+                <div class="rollRight"></div>
+            </div>
+        </div><div class="flipperContainer"> <!-- flip card -->
+            <div class='flipCard'> <!-- flip card inner -->
+                <div class="halfCard topCard__back">
+                    <span> 2</span>
+                </div>
+                <div class='halfCard bottomCard'>
+                    <span>1</span>
+                </div>
+                <div class='halfCard topCard'>
+                    <span>1</span>
+                    <div class="rollLeft rollLeft__top"></div>
+                    <div class="rollRight rollRight__top"></div>
+                </div>
+                <div class="halfCard bottomCard__back">
+                    <div class="rollLeft rollLeft__bottom"></div>
+                    <div class="rollRight rollRight__bottom"></div>
+                    <span>2</span>
+                </div>
+                <div class="rollLeft"></div>
+                <div class="rollRight"></div>
+            </div>
+        </div><div class="flipperContainer"> <!-- flip card -->
+            <div class='flipCard'> <!-- flip card inner -->
+                <div class="halfCard topCard__back">
+                    <span> 2</span>
+                </div>
+                <div class='halfCard bottomCard'>
+                    <span>1</span>
+                </div>
+                <div class='halfCard topCard'>
+                    <span>1</span>
+                    <div class="rollLeft rollLeft__top"></div>
+                    <div class="rollRight rollRight__top"></div>
+                </div>
+                <div class="halfCard bottomCard__back">
+                    <div class="rollLeft rollLeft__bottom"></div>
+                    <div class="rollRight rollRight__bottom"></div>
+                    <span>2</span>
+                </div>
+                <div class="rollLeft"></div>
+                <div class="rollRight"></div>
+            </div>
+        </div><div class="flipperContainer"> <!-- flip card -->
+            <div class='flipCard'> <!-- flip card inner -->
+                <div class="halfCard topCard__back">
+                    <span> 2</span>
+                </div>
+                <div class='halfCard bottomCard'>
+                    <span>1</span>
+                </div>
+                <div class='halfCard topCard'>
+                    <span>1</span>
+                    <div class="rollLeft rollLeft__top"></div>
+                    <div class="rollRight rollRight__top"></div>
+                </div>
+                <div class="halfCard bottomCard__back">
+                    <div class="rollLeft rollLeft__bottom"></div>
+                    <div class="rollRight rollRight__bottom"></div>
+                    <span>2</span>
+                </div>
+                <div class="rollLeft"></div>
+                <div class="rollRight"></div>
+            </div>
+        </div><div class="flipperContainer"> <!-- flip card -->
+            <div class='flipCard'> <!-- flip card inner -->
+                <div class="halfCard topCard__back">
+                    <span> 2</span>
+                </div>
+                <div class='halfCard bottomCard'>
+                    <span>1</span>
+                </div>
+                <div class='halfCard topCard'>
+                    <span>1</span>
+                    <div class="rollLeft rollLeft__top"></div>
+                    <div class="rollRight rollRight__top"></div>
+                </div>
+                <div class="halfCard bottomCard__back">
+                    <div class="rollLeft rollLeft__bottom"></div>
+                    <div class="rollRight rollRight__bottom"></div>
+                    <span>2</span>
+                </div>
+                <div class="rollLeft"></div>
+                <div class="rollRight"></div>
+            </div>
+        </div><div class="flipperContainer"> <!-- flip card -->
+            <div class='flipCard'> <!-- flip card inner -->
+                <div class="halfCard topCard__back">
+                    <span> 2</span>
+                </div>
+                <div class='halfCard bottomCard'>
+                    <span>1</span>
+                </div>
+                <div class='halfCard topCard'>
+                    <span>1</span>
+                    <div class="rollLeft rollLeft__top"></div>
+                    <div class="rollRight rollRight__top"></div>
+                </div>
+                <div class="halfCard bottomCard__back">
+                    <div class="rollLeft rollLeft__bottom"></div>
+                    <div class="rollRight rollRight__bottom"></div>
+                    <span>2</span>
+                </div>
+                <div class="rollLeft"></div>
+                <div class="rollRight"></div>
+            </div>
+        </div><div class="flipperContainer"> <!-- flip card -->
+            <div class='flipCard'> <!-- flip card inner -->
+                <div class="halfCard topCard__back">
+                    <span> 2</span>
+                </div>
+                <div class='halfCard bottomCard'>
+                    <span>1</span>
+                </div>
+                <div class='halfCard topCard'>
+                    <span>1</span>
+                    <div class="rollLeft rollLeft__top"></div>
+                    <div class="rollRight rollRight__top"></div>
+                </div>
+                <div class="halfCard bottomCard__back">
+                    <div class="rollLeft rollLeft__bottom"></div>
+                    <div class="rollRight rollRight__bottom"></div>
+                    <span>2</span>
+                </div>
+                <div class="rollLeft"></div>
+                <div class="rollRight"></div>
+            </div>
+        </div><div class="flipperContainer"> <!-- flip card -->
             <div class='flipCard'> <!-- flip card inner -->
                 <div class="halfCard topCard__back">
                     <span> 2</span>
@@ -129,29 +397,6 @@
                 <div class="rollRight"></div>
             </div>
         </div>
-        <div class="flipperContainer">
-            <div class='flipCard'> <!-- flip card inner -->
-                <div class="halfCard topCard__back">
-                    <span> 4</span>
-                </div>
-                <div class='halfCard bottomCard'>
-                    <span>3</span>
-                </div>
-                <div class='halfCard topCard'>
-                    <span>3</span>
-                    <div class="rollLeft rollLeft__top"></div>
-                    <div class="rollRight rollRight__top"></div>
-                </div>
-                <div class="halfCard bottomCard__back">
-                    <div class="rollLeft rollLeft__bottom"></div>
-                    <div class="rollRight rollRight__bottom"></div>
-                    <span>4</span>
-                </div>
-                <div class="rollLeft"></div>
-                <div class="rollRight"></div>
-        </div>
-        </div>
-        
     </div>
 </body>
 </html>

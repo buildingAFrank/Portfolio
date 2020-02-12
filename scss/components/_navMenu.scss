@@ -4,4 +4,26 @@
     margin:auto 2.5vw;
     
     height:50vh;
+    background-color:darkgrey;
 }
+
+.nav-menu{
+    display:flex;
+    flex-flow:column wrap;
+    justify-content:center;
+    align-content:center;
+}
+@include FlipCard(item-menu, menu-option, menuRoll__left, menuRoll__right, halfCardMenu, tophalf, bottomhalf,100%,(50vh/8));
+
+.item-menu{
+    margin:.5vh auto;
+}
+
+.menu-option:hover .bottomhalf__back{
+    transform:rotateX(0deg);
+    border-top:transparent;
+  }
+  .menu-option:hover .tophalf{
+    transform:rotateX(-90deg);
+    border-bottom:transparent;
+  }

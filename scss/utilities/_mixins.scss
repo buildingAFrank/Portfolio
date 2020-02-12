@@ -1,0 +1,139 @@
+
+@mixin FlipCard($contain, $card, $rightRoller, $leftRoller, $halfCard, $topCard, $bottomCard, $cardWidth, $cardHeight){
+
+    .#{$contain}{
+    
+        width:$cardWidth;
+        height:$cardHeight;
+        // height:auto;
+        // width:auto;
+        perspective:1000px;
+       
+    }
+    
+     .#{$card}{
+        transform-style:preserve-3d;
+        position:absolute;
+    
+        width:$cardWidth;
+        height:$cardHeight;
+        border-radius:10px;
+            
+        &::before, &::after{
+            content: '';
+            position: absolute;
+            z-index: -1;
+            display:block;
+            border-radius:10px;
+            
+        }
+        &::before{
+                width: $cardWidth;
+                height: $cardHeight/2;
+                box-shadow: 0px 0px 5px 5px grey;
+        }
+            
+        &::after{
+            box-shadow: 0px 0px 10px 8px black;
+            width: $cardWidth - ($cardWidth/20);
+            height: $cardHeight/2;
+            bottom:0px;
+            left:2px;
+        }
+    }
+    
+.#{$rightRoller}, .#{$leftRoller}{
+    position:absolute;
+    bottom:$cardHeight/3;
+
+    width:10%;
+    height:$cardHeight/4;
+    border:1px #2d2d2d solid;
+    border-radius:6px;
+
+    background-image:linear-gradient(#000,#3d3d3d,silver,#3d3d3d,#000);
+    
+    &__top{
+        bottom:-$cardHeight/3;
+    }
+
+    &__bottom{
+        top:-$cardHeight/3;
+    }
+}
+.#{$leftRoller}{
+    left:1px;
+}
+.#{$rightRoller}{
+    right: 1px;
+}
+
+
+    
+.#{$halfCard}{
+    position:absolute;
+    box-sizing:border-box;
+
+    width:$cardWidth;
+    height:$cardHeight/2;
+    backface-visibility:hidden;
+    overflow:hidden;
+
+    text-align:center;
+    font-size:$cardHeight - ($cardHeight/10);
+    color:white;
+
+    span{
+        position:absolute;
+        left:0;
+        top:-($cardHeight/7); 
+        width:$cardWidth;
+        height:$cardHeight/2;
+        }
+}
+
+.#{$topCard}{
+    transition: all .15s linear;
+
+    &,&__back{
+        background-image:linear-gradient(#7d7d7d,#4d4d4d,#0d0d0d);
+        border-bottom:1px black solid;
+        border-top:2px #b2b2b2 solid;
+        border-top-left-radius:7px;
+        border-top-right-radius:7px;
+        transform-origin: bottom center;
+    }
+}
+
+.#{$bottomCard}{
+    &,&__back{
+        top:$cardHeight/2;
+        background-image:linear-gradient(#1d1d1d,#3d3d3d,#0d0d0d);
+        border-top:1px black solid;
+        border-bottom-left-radius:7px;
+        border-bottom-right-radius:7px;
+        span{
+            top:-($cardHeight*0.62);  
+
+            transform-origin:bottom center;
+        }
+    }
+    &__back{
+        transform:rotateX(90deg);
+        transform-origin:top center;
+        transition:all .15s linear .15s;
+    }
+}
+
+
+}
+
+
+.flipCard:hover .bottomCard__back{
+  transform:rotateX(0deg);
+  border-top:transparent;
+}
+.flipCard:hover .topCard{
+  transform:rotateX(-90deg);
+  border-bottom:transparent;
+}

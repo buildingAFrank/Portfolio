@@ -1,7 +1,14 @@
 
+
+$board-width:75vw;
+$card-space:(($board-width/17)/10)/2;
+$card-width:($board-width/17)-($card-space*2);
+
+$board-height:80vh;
+$card-height:$board-height/10;
 .board{
     height:80vh;
-    width:65vw;
+    width:$board-width;
     margin:auto 2.5vw;
     display:flex;
     justify-content:space-evenly;
@@ -10,8 +17,8 @@
 
 .flipperContainer{
     
-    width:175px;
-    height:250px;
+    width:$card-width;
+    height:$card-height;
     // height:auto;
     // width:auto;
     perspective:1000px;
@@ -22,8 +29,8 @@
     transform-style:preserve-3d;
     position:absolute;
 
-    width:175px;
-    height:250px;
+    width:$card-width;
+    height:$card-height;
     border-radius:10px;
         
     &::before, &::after{
@@ -31,20 +38,19 @@
         position: absolute;
         z-index: -1;
         display:block;
-
         border-radius:10px;
         
     }
     &::before{
-            width: 175px;
-            height: 130px;
+            width: $card-width;
+            height: $card-height/2;
             box-shadow: 0px 0px 5px 5px grey;
     }
         
     &::after{
         box-shadow: 0px 0px 10px 8px black;
-        width: 170px;
-        height: 125px;
+        width: $card-width - ($card-width/20);
+        height: $card-height/2;
         bottom:0px;
         left:2px;
     }
@@ -52,21 +58,21 @@
 
 .rollLeft, .rollRight{
     position:absolute;
-    bottom:calc(50% - 25px);
+    bottom:$card-height/3;
 
     width:10%;
-    height:50px;
+    height:$card-height/4;
     border:1px #2d2d2d solid;
     border-radius:6px;
 
     background-image:linear-gradient(#000,#3d3d3d,silver,#3d3d3d,#000);
     
     &__top{
-        bottom:-28px;
+        bottom:-$card-height/3;
     }
 
     &__bottom{
-        top:-28px;
+        top:-$card-height/3;
     }
 }
 .rollLeft{
@@ -78,23 +84,23 @@
 
 .halfCard{
     position:absolute;
-
     box-sizing:border-box;
-    width:175px;
-    height:125px;
+
+    width:$card-width;
+    height:$card-height/2;
     backface-visibility:hidden;
     overflow:hidden;
 
     text-align:center;
-    font-size:200px;
+    font-size:$card-height;
     color:white;
 
     span{
         position:absolute;
         left:0;
-
-        width:175px;
-        height:125px;
+        top:-($card-height/7); 
+        width:$card-width;
+        height:$card-height/2;
         }
 }
 
@@ -113,13 +119,13 @@
 
 .bottomCard{
     &,&__back{
-        top:125px;
+        top:$card-height/2;
         background-image:linear-gradient(#1d1d1d,#3d3d3d,#0d0d0d);
         border-top:1px black solid;
         border-bottom-left-radius:7px;
         border-bottom-right-radius:7px;
         span{
-            top:-125px;  
+            top:-($card-height*0.62);  
 
             transform-origin:bottom center;
         }

@@ -1,2 +1,6 @@
-$tiny-cols:4.1666666vw;
+$board-width:75vw;
+$section-card-space:(($board-width/17)/10)/2;
+$section-card-width:($board-width/17)-($section-card-space*2);
 
+$board-height:80vh;
+$section-card-height:$board-height/10;
