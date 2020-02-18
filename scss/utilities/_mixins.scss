@@ -1,5 +1,5 @@
 
-@mixin FlipCard($contain, $card, $rightRoller, $leftRoller, $halfCard, $topCard, $bottomCard, $cardWidth, $cardHeight){
+@mixin FlipCard($contain, $card, $rightRoller, $leftRoller, $halfCard, $topCard, $bottomCard, $cardWidth, $cardHeight,$rollWidth:10%){
 
     .#{$contain}{
     
@@ -46,7 +46,7 @@
     position:absolute;
     bottom:$cardHeight/3;
 
-    width:10%;
+    width:$rollWidth;
     height:$cardHeight/4;
     border:1px #2d2d2d solid;
     border-radius:6px;
@@ -80,28 +80,27 @@
     overflow:hidden;
 
     text-align:center;
-    font-size:$cardHeight - ($cardHeight/10);
+    font-size:$cardHeight - ($cardHeight/8);
     color:white;
-
-    span{
-        position:absolute;
-        left:0;
-        top:-($cardHeight/7); 
-        width:$cardWidth;
-        height:$cardHeight/2;
-        }
 }
 
 .#{$topCard}{
     transition: all .15s linear;
-
+    
     &,&__back{
         background-image:linear-gradient(#7d7d7d,#4d4d4d,#0d0d0d);
-        border-bottom:1px black solid;
+        border-bottom:1px rgba(0,0,0,0.4) solid;
         border-top:2px #b2b2b2 solid;
         border-top-left-radius:7px;
         border-top-right-radius:7px;
         transform-origin: bottom center;
+        span{
+            position:absolute;
+            left:0;
+            
+            width:$cardWidth;
+            height:$cardHeight/2;
+            }
     }
 }
 
@@ -109,13 +108,16 @@
     &,&__back{
         top:$cardHeight/2;
         background-image:linear-gradient(#1d1d1d,#3d3d3d,#0d0d0d);
-        border-top:1px black solid;
+        border-top:1px rgba(0,0,0, 0.4) solid;
         border-bottom-left-radius:7px;
         border-bottom-right-radius:7px;
         span{
-            top:-($cardHeight*0.62);  
-
-            transform-origin:bottom center;
+            position:absolute;
+            top:-($cardHeight/2); 
+            left:0; 
+            width:$cardWidth;
+            height:$cardHeight/2;
+            transform-origin:top center;
         }
     }
     &__back{

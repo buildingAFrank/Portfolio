@@ -3,9 +3,190 @@
   padding: 0;
 }
 
+.flipCard:hover .bottomCard__back {
+  -webkit-transform: rotateX(0deg);
+          transform: rotateX(0deg);
+  border-top: transparent;
+}
+
+.flipCard:hover .topCard {
+  -webkit-transform: rotateX(-90deg);
+          transform: rotateX(-90deg);
+  border-bottom: transparent;
+}
+
+.navigation {
+  width: 20vw;
+  margin: auto 2.5vw;
+  height: 50vh;
+}
+
+.nav-menu {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column wrap;
+          flex-flow: column wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-line-pack: center;
+      align-content: center;
+}
+
+.item-menu {
+  width: 100%;
+  height: 6.25vh;
+  -webkit-perspective: 1000px;
+          perspective: 1000px;
+}
+
+.menu-option {
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+  position: absolute;
+  width: 100%;
+  height: 6.25vh;
+  border-radius: 10px;
+}
+
+.menu-option::before, .menu-option::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  display: block;
+  border-radius: 10px;
+}
+
+.menu-option::before {
+  width: 100%;
+  height: 3.125vh;
+  -webkit-box-shadow: 0px 0px 5px 5px grey;
+          box-shadow: 0px 0px 5px 5px grey;
+}
+
+.menu-option::after {
+  -webkit-box-shadow: 0px 0px 10px 8px black;
+          box-shadow: 0px 0px 10px 8px black;
+  width: 95%;
+  height: 3.125vh;
+  bottom: 0px;
+  left: 2px;
+}
+
+.menuRoll__left, .menuRoll__right {
+  position: absolute;
+  bottom: 2.08333vh;
+  width: 3%;
+  height: 1.5625vh;
+  border: 1px #2d2d2d solid;
+  border-radius: 6px;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#000), color-stop(#3d3d3d), color-stop(silver), color-stop(#3d3d3d), to(#000));
+  background-image: linear-gradient(#000, #3d3d3d, silver, #3d3d3d, #000);
+}
+
+.menuRoll__left__top, .menuRoll__right__top {
+  bottom: -2.08333vh;
+}
+
+.menuRoll__left__bottom, .menuRoll__right__bottom {
+  top: -2.08333vh;
+}
+
+.menuRoll__right {
+  left: 1px;
+}
+
+.menuRoll__left {
+  right: 1px;
+}
+
+.halfCardMenu {
+  position: absolute;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  width: 100%;
+  height: 3.125vh;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  overflow: hidden;
+  text-align: center;
+  font-size: 5.46875vh;
+  color: white;
+}
+
+.tophalf {
+  -webkit-transition: all .15s linear;
+  transition: all .15s linear;
+}
+
+.tophalf, .tophalf__back {
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#7d7d7d), color-stop(#4d4d4d), to(#0d0d0d));
+  background-image: linear-gradient(#7d7d7d, #4d4d4d, #0d0d0d);
+  border-bottom: 1px rgba(0, 0, 0, 0.4) solid;
+  border-top: 2px #b2b2b2 solid;
+  border-top-left-radius: 7px;
+  border-top-right-radius: 7px;
+  -webkit-transform-origin: bottom center;
+          transform-origin: bottom center;
+}
+
+.tophalf span, .tophalf__back span {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 3.125vh;
+}
+
+.bottomhalf, .bottomhalf__back {
+  top: 3.125vh;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#1d1d1d), color-stop(#3d3d3d), to(#0d0d0d));
+  background-image: linear-gradient(#1d1d1d, #3d3d3d, #0d0d0d);
+  border-top: 1px rgba(0, 0, 0, 0.4) solid;
+  border-bottom-left-radius: 7px;
+  border-bottom-right-radius: 7px;
+}
+
+.bottomhalf span, .bottomhalf__back span {
+  position: absolute;
+  top: -3.125vh;
+  left: 0;
+  width: 100%;
+  height: 3.125vh;
+  -webkit-transform-origin: top center;
+          transform-origin: top center;
+}
+
+.bottomhalf__back {
+  -webkit-transform: rotateX(90deg);
+          transform: rotateX(90deg);
+  -webkit-transform-origin: top center;
+          transform-origin: top center;
+  -webkit-transition: all .15s linear .15s;
+  transition: all .15s linear .15s;
+}
+
+.item-menu {
+  margin: .5vh auto;
+}
+
+.menu-option:hover .bottomhalf__back {
+  -webkit-transform: rotateX(0deg);
+          transform: rotateX(0deg);
+  border-top: transparent;
+}
+
+.menu-option:hover .tophalf {
+  -webkit-transform: rotateX(-90deg);
+          transform: rotateX(-90deg);
+  border-bottom: transparent;
+}
+
 .board {
   height: 80vh;
-  width: 65vw;
+  width: 75vw;
   margin: auto 2.5vw;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -19,8 +200,8 @@
 }
 
 .flipperContainer {
-  width: 175px;
-  height: 250px;
+  width: 3.97059vw;
+  height: 8vh;
   -webkit-perspective: 1000px;
           perspective: 1000px;
 }
@@ -29,8 +210,8 @@
   -webkit-transform-style: preserve-3d;
           transform-style: preserve-3d;
   position: absolute;
-  width: 175px;
-  height: 250px;
+  width: 3.97059vw;
+  height: 8vh;
   border-radius: 10px;
 }
 
@@ -43,8 +224,8 @@
 }
 
 .flipCard::before {
-  width: 175px;
-  height: 130px;
+  width: 3.97059vw;
+  height: 4vh;
   -webkit-box-shadow: 0px 0px 5px 5px grey;
           box-shadow: 0px 0px 5px 5px grey;
 }
@@ -52,17 +233,17 @@
 .flipCard::after {
   -webkit-box-shadow: 0px 0px 10px 8px black;
           box-shadow: 0px 0px 10px 8px black;
-  width: 170px;
-  height: 125px;
+  width: 3.77206vw;
+  height: 4vh;
   bottom: 0px;
   left: 2px;
 }
 
 .rollLeft, .rollRight {
   position: absolute;
-  bottom: calc(50% - 25px);
+  bottom: 2.66667vh;
   width: 10%;
-  height: 50px;
+  height: 2vh;
   border: 1px #2d2d2d solid;
   border-radius: 6px;
   background-image: -webkit-gradient(linear, left top, left bottom, from(#000), color-stop(#3d3d3d), color-stop(silver), color-stop(#3d3d3d), to(#000));
@@ -70,11 +251,11 @@
 }
 
 .rollLeft__top, .rollRight__top {
-  bottom: -28px;
+  bottom: -2.66667vh;
 }
 
 .rollLeft__bottom, .rollRight__bottom {
-  top: -28px;
+  top: -2.66667vh;
 }
 
 .rollLeft {
@@ -89,21 +270,22 @@
   position: absolute;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
-  width: 175px;
-  height: 125px;
+  width: 3.97059vw;
+  height: 4vh;
   -webkit-backface-visibility: hidden;
           backface-visibility: hidden;
   overflow: hidden;
   text-align: center;
-  font-size: 200px;
+  font-size: 8vh;
   color: white;
 }
 
 .halfCard span {
   position: absolute;
   left: 0;
-  width: 175px;
-  height: 125px;
+  top: -1.14286vh;
+  width: 3.97059vw;
+  height: 4vh;
 }
 
 .topCard {
@@ -123,7 +305,7 @@
 }
 
 .bottomCard, .bottomCard__back {
-  top: 125px;
+  top: 4vh;
   background-image: -webkit-gradient(linear, left top, left bottom, from(#1d1d1d), color-stop(#3d3d3d), to(#0d0d0d));
   background-image: linear-gradient(#1d1d1d, #3d3d3d, #0d0d0d);
   border-top: 1px black solid;
@@ -132,7 +314,7 @@
 }
 
 .bottomCard span, .bottomCard__back span {
-  top: -125px;
+  top: -4.96vh;
   -webkit-transform-origin: bottom center;
           transform-origin: bottom center;
 }
@@ -156,13 +338,6 @@
   -webkit-transform: rotateX(-90deg);
           transform: rotateX(-90deg);
   border-bottom: transparent;
-}
-
-.navigation {
-  width: 20vw;
-  background-color: white;
-  margin: auto 2.5vw;
-  height: 50vh;
 }
 
 /** Affichage de base**/
