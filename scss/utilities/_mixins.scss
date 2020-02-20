@@ -2,7 +2,7 @@
 @mixin FlipCard($contain, $card, $rightRoller, $leftRoller, $halfCard, $topCard, $bottomCard, $cardWidth, $cardHeight,$rollWidth:10%){
 
     .#{$contain}{
-    
+        
         width:$cardWidth;
         height:$cardHeight;
         // height:auto;
@@ -30,12 +30,12 @@
         &::before{
                 width: $cardWidth;
                 height: $cardHeight/2;
-                box-shadow: 0px 0px 5px 5px grey;
+                box-shadow: 0px 0px 3px 3px grey;
         }
             
         &::after{
-            box-shadow: 0px 0px 10px 8px black;
-            width: $cardWidth - ($cardWidth/20);
+            box-shadow: 0px 0px 5px 5px black;
+            width: 97%;
             height: $cardHeight/2;
             bottom:0px;
             left:2px;
@@ -44,7 +44,7 @@
     
 .#{$rightRoller}, .#{$leftRoller}{
     position:absolute;
-    bottom:$cardHeight/3;
+    bottom:(($cardHeight/2)-($cardHeight/8));
 
     width:$rollWidth;
     height:$cardHeight/4;
@@ -80,16 +80,19 @@
     overflow:hidden;
 
     text-align:center;
-    font-size:$cardHeight - ($cardHeight/8);
+    font-family:'Palette';
+    font-size:$cardHeight - ($cardHeight/4);
     color:white;
 }
 
 .#{$topCard}{
-    transition: all .15s linear;
+    // transition: all .15s linear;
     
     &,&__back{
         background-image:linear-gradient(#7d7d7d,#4d4d4d,#0d0d0d);
-        border-bottom:1px rgba(0,0,0,0.4) solid;
+        border-bottom:1px solid rgba(0,0,0,0.1);
+        -webkit-background-clip: padding-box; /* for Safari */
+        background-clip: padding-box;
         border-top:2px #b2b2b2 solid;
         border-top-left-radius:7px;
         border-top-right-radius:7px;
@@ -97,7 +100,9 @@
         span{
             position:absolute;
             left:0;
-            
+            top:$cardHeight/4;
+
+            line-height:$cardHeight/2;
             width:$cardWidth;
             height:$cardHeight/2;
             }
@@ -108,22 +113,23 @@
     &,&__back{
         top:$cardHeight/2;
         background-image:linear-gradient(#1d1d1d,#3d3d3d,#0d0d0d);
-        border-top:1px rgba(0,0,0, 0.4) solid;
+        border-top:1px solid rgba(0,0,0, 0.1);
         border-bottom-left-radius:7px;
         border-bottom-right-radius:7px;
         span{
             position:absolute;
-            top:-($cardHeight/2); 
+            bottom:$cardHeight*0.218; 
             left:0; 
             width:$cardWidth;
             height:$cardHeight/2;
+            line-height:$cardHeight/2;
             transform-origin:top center;
         }
     }
     &__back{
         transform:rotateX(90deg);
         transform-origin:top center;
-        transition:all .15s linear .15s;
+        // transition:all .15s linear .15s;
     }
 }
 
@@ -133,9 +139,9 @@
 
 .flipCard:hover .bottomCard__back{
   transform:rotateX(0deg);
-  border-top:transparent;
+
 }
 .flipCard:hover .topCard{
   transform:rotateX(-90deg);
-  border-bottom:transparent;
+
 }
