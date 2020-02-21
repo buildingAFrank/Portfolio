@@ -174,12 +174,18 @@
   margin: .5vh auto;
 }
 
-.hover-item {
+.menuOverlay {
+  position: absolute;
+  height: inherit;
+  width: inherit;
+}
+
+.hover-menu {
   background-image: -webkit-gradient(linear, left top, left bottom, from(#bebebe), color-stop(#8b8b8b), to(#4e4e4e));
   background-image: linear-gradient(#bebebe, #8b8b8b, #4e4e4e);
 }
 
-.hover-item__bottom {
+.hover-menu__bottom {
   background-image: -webkit-gradient(linear, left top, left bottom, from(#747474), color-stop(#000000), to(#3a3a3a));
   background-image: linear-gradient(#747474, #000000, #3a3a3a);
 }

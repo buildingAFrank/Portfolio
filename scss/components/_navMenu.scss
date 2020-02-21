@@ -16,11 +16,14 @@
 .item-menu{
     margin:.5vh auto;
 }
+.menuOverlay{
+  position:absolute;height:inherit;width:inherit;
+}
 
-  .hover-item{
+  .hover-menu{
     background-image:linear-gradient(#bebebe,#8b8b8b,#4e4e4e);
   }
-  .hover-item__bottom{
+  .hover-menu__bottom{
     background-image:linear-gradient(#747474,#000000,#3a3a3a);
   }
 
