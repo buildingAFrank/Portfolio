@@ -8,3 +8,7 @@
 }
 
 @include FlipCard(flipperContainer, flipCard, rollRight, rollLeft, halfCard, topCard, bottomCard, $section-card-width, $section-card-height);
+
+.someClass{
+    color:yellow;
+}
