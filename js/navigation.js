@@ -29,14 +29,14 @@ function flipStart(itemMenu,cssClass="",cssClassbottom=""){
     let $top=$('.topCard'),
     $topBack=$('.topCard__back'),
     $bottomBack=$('.bottomCard__back'),
-    $item=$(itemMenu.currentTarget).siblings();
+    $item=$(itemMenu.currentTarget);
 
     // si c'est un item du menu 
     if(cssClass=="hover-menu"){
         $top=$('.tophalf');
         $topBack=$('.tophalf__back');
         $bottomBack=$('.bottomhalf__back');
-    
+        $item=$(itemMenu.currentTarget).siblings();
         //si le event contient la class .hovering
         if($item.hasClass('hovering')){
             //l'animation precedente n'est pas terminer, sort de la fonction
@@ -74,7 +74,7 @@ function flipStart(itemMenu,cssClass="",cssClassbottom=""){
                         window.setTimeout(
                         function(){   
                             $item.addClass("hovering");
-                            console.log('addclass hovering');
+                            console.log('top animation done, addclass hovering');
                             },300
                         )
                     }
@@ -88,14 +88,14 @@ function flipStart(itemMenu,cssClass="",cssClassbottom=""){
             {
                 perspective:'1000px',
                 rotateX:'-90deg',
-                duration:150
+                duration:100
             }
         );
         $item.find($bottomBack).transition(
             {
                 perspective:'1000px',
                 rotateX:'0deg',
-                duration:150,
+                duration:100,
                 delay:150
             }
         );
@@ -109,26 +109,26 @@ function flipEnd(itemMenu,cssClass="",cssClassbottom=""){
     $topBack=$('.topCard__back'),
     $bottom=$('.bottomCard'),
     $bottomBack=$('.bottomCard__back'),
-    $item=$(itemMenu.currentTarget).siblings();
+    $item=$(itemMenu.currentTarget);
 
     if(cssClass=="hover-menu"){
         $top=$('.tophalf');
         $topBack=$('.tophalf__back');
         $bottom=$('.bottomhalf');
         $bottomBack=$('.bottomhalf__back');
-    
+        $item=$(itemMenu.currentTarget).siblings();
         if($item.hasClass('hoverPlay')){
 
             console.log('item has class: hoverPlay');
 
-            window.setInterval( function() {   
+            var progressState= setInterval( function() {   
                 if ($item.hasClass('hovering') && !$item.hasClass('hoverStop')){
 
                     console.log('item has class hovering but not hoverStop');
 
                     $item.addClass('hoverStop');
 
-                    console.log('so we had hoverStop');
+                    console.log('so we add hoverStop');
 
                     $item.find($bottom).addClass(cssClassbottom);
                     $item.find($topBack).removeClass(cssClass);
@@ -149,22 +149,19 @@ function flipEnd(itemMenu,cssClass="",cssClassbottom=""){
                                 },
                                 function(){
                                     $(this).removeAttr('style');$item.find($bottom).removeClass(cssClassbottom);
-                                    $item.removeClass('hovering hoverPlay');
-                                    
+                                    $item.removeClass('hovering hoverPlay hoverStop');
+                                    clearInterval(progressState);
                                     console.log('done animating the flip, remove class hovering and hoverPlay');
                                 }
                             );
                         }
                     );    
                 }
-            },10);
-            console.log('try and make sure that class hoverStop is removed here');
-            $item.removeClass('hoverStop hovering');
+            },25);
         }   
         else{
             console.log('might jump here if hovePlay isnt here but hovering is');
             console.log('item has hovering?  ',$item.hasClass('hovering'));
-            return
         }
        // $item.removeClass('hoverStop hovering');
     }
@@ -172,17 +169,26 @@ function flipEnd(itemMenu,cssClass="",cssClassbottom=""){
     else{
         
             
-            $item.find($top).removeAttr('style').transition({perspective:'1000px',
-            rotateX:'-90deg',
-            duration:150}, 
-            function(){$(this).removeAttr('style')}
+            $item.find($top).removeAttr('style').transition(
+                {
+                    perspective:'1000px',
+                    rotateX:'-90deg',
+                    duration:1000
+                }, 
+                function(){
+                    $(this).removeAttr('style')
+                }
             );
-            $item.find($bottomBack).removeAttr('style').transition({perspective:'1000px',
-            rotateX:'0deg',
-            duration:150,
-            delay:150}, 
-            function(){$(this).removeAttr('style')})
+            $item.find($bottomBack).removeAttr('style').transition(
+                {
+                    perspective:'1000px',
+                    rotateX:'0deg',
+                    duration:1000,
+                    delay:150
+                }, 
+                function(){
+                    $(this).removeAttr('style')
+                }
+            );
     }
-    
-
 }
