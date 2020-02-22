@@ -6,7 +6,7 @@ $(".menuOverlay").hover(
     function(event){stateCheck(event);},
     function(event){stateCheck(event)})
 
-$(".flipperContainer").hover(function(event){flipStart(event);},function(event){flipEnd(event);})
+$(".flipperContainer").hover(flipStart,flipEnd);
 
 //menu selection
 
@@ -81,15 +81,12 @@ function flipMenuStart(itemMenu,cssClass,cssClassBottom){
         $topBack=$('.tophalf__back');
         $bottomBack=$('.bottomhalf__back');
         $item=$(itemMenu.currentTarget).siblings();
-        //si le event contient la class .hovering
-    if($item.hasClass('hovering')){
-        //l'animation precedente n'est pas terminer, sort de la fonction
-        console.log('animating');
-        return
-    }
-    else{   
+
+        //si c'est dans son etat initial on peu demarrer l'animation
+    if(!$item.hasClass('hovering')){   
         $item.attr('data-state','wake');         
         //ajouter une class pour reference
+        
         $item.addClass('hoverPlay');
         console.log('addClass hoverPlay');
         //assigne la classe de hover a l'element cacher derriere la palette du haut
@@ -104,23 +101,22 @@ function flipMenuStart(itemMenu,cssClass,cssClassBottom){
                 //ajouter la class representant son etat hover
                 function(){
                     $(this).addClass(cssClass);
+                   $item.find($bottomBack).addClass(cssClassBottom).transition(
+                    {
+                        perspective:'1000px',
+                        rotateX:'0deg',
+                        duration:150
+                    },  
+                    function(){   
+                        $item.addClass("hovering");
+                        console.log('top animation done, addclass hovering');
+                    }     
+                )
                 }
             );
 
         //attends la fin de l'animation du haut avant de declancher l'animation du bas de la palette
-        $item.find($bottomBack).addClass(cssClassBottom).transition(
-            {
-                perspective:'1000px',
-                rotateX:'0deg',
-                duration:150,
-                delay:150
-            },  
-            function(){   
-                $item.addClass("hovering");
-                console.log('top animation done, addclass hovering');
-            }
-                
-        )
+        
     }
 }
 
@@ -130,12 +126,9 @@ function flipMenuReset(itemMenu,cssClass,cssClassBottom){
         $bottom=$('.bottomhalf'),
         $bottomBack=$('.bottomhalf__back'),
         $item=$(itemMenu.currentTarget).siblings();
-    if($item.hasClass('hoverPlay')){
 
-        console.log('item has class: hoverPlay');
-
-        
          progressState[$item.attr('id')]= setInterval( function() {   
+
             if ($item.hasClass('hovering') && !$item.hasClass('hoverStop')){
 
                 console.log('item has class hovering but not hoverStop');
@@ -174,178 +167,63 @@ function flipMenuReset(itemMenu,cssClass,cssClassBottom){
         },25);
         
     }   
-    else{
-        console.log('might jump here if hovePlay isnt here but hovering is');
-        console.log('item has hovering?  ',$item.hasClass('hovering'));
-    }
-}
 
-function flipStart(itemMenu,cssClass="",cssClassbottom=""){
 
-    let $top=$('.topCard'),
-    $topBack=$('.topCard__back'),
-    $bottomBack=$('.bottomCard__back'),
-    $item=$(itemMenu.currentTarget);
+function flipStart(item){
 
-    // si c'est un item du menu 
-    if(cssClass=="hover-menu"){
-        if(itemMenu.type=="mouseenter"){console.log('ca fonctionne');}
-        let $top=$('.tophalf');
-        $topBack=$('.tophalf__back');
-        $bottomBack=$('.bottomhalf__back');
-        $item=$(itemMenu.currentTarget).siblings();
-        //si le event contient la class .hovering
-        if($item.hasClass('hovering')){
-            //l'animation precedente n'est pas terminer, sort de la fonction
-            console.log('animating');
-            return
-        }
-        else{            
-            //ajouter une class pour reference
-            $item.addClass('hoverPlay');
-            console.log('addClass hoverPlay');
-            //assigne la classe de hover a l'element cacher derriere la palette du haut
-            $item.find($topBack).addClass(cssClass);
-            //trouver la palette du haut et appliquer une animation de transition
-            $item.find($top).transition(
-                    {
-                        perspective:'1000px',
-                        rotateX:'-90deg',
-                        duration:150
-                    }, 
-                    //ajouter la class representant son etat hover
-                    function(){
-                        $(this).addClass(cssClass);
-                    }
-                );
+    const $item=$(item.currentTarget);
+    const $top=$item.find($('.topCard'));
+    const $bottomBack=$item.find($('.bottomCard__back'));
 
-            //attends la fin de l'animation du haut avant de declancher l'animation du bas de la palette
-            $item.find($bottomBack).addClass(cssClassbottom).transition(
+    console.log('animation de la section');
+    $top.transition(
+        {
+            perspective:'1000px',
+            rotateX:'-90deg',
+            duration:150
+        },
+        function(){
+            $bottomBack.transition(
                 {
                     perspective:'1000px',
                     rotateX:'0deg',
-                    duration:150,
-                    delay:150
-                }, 
-                    function(){
-                        window.setTimeout(
-                        function(){   
-                            $item.addClass("hovering");
-                            console.log('top animation done, addclass hovering');
-                            },300
-                        )
-                    }
-            )
-        }
-    }else{
-        //si ce n'est pas un item du menu, c'est les palettes d'entete de section
-        console.log("section ,",$item);
-        $item.find($top).transition(
-            console.log('anim section'),
-            {
-                perspective:'1000px',
-                rotateX:'-90deg',
-                duration:100
-            }
-        );
-        $item.find($bottomBack).transition(
-            {
-                perspective:'1000px',
-                rotateX:'0deg',
-                duration:100,
-                delay:150
-            }
-        );
-    }
-    
-}
-
-function flipEnd(itemMenu,cssClass="",cssClassbottom=""){
-
-    var $top=$('.topCard'),
-    $topBack=$('.topCard__back'),
-    $bottom=$('.bottomCard'),
-    $bottomBack=$('.bottomCard__back'),
-    $item=$(itemMenu.currentTarget);
-
-    if(cssClass=="hover-menu"){
-        $top=$('.tophalf');
-        $topBack=$('.tophalf__back');
-        $bottom=$('.bottomhalf');
-        $bottomBack=$('.bottomhalf__back');
-        $item=$(itemMenu.currentTarget).siblings();
-        if($item.hasClass('hoverPlay')){
-
-            console.log('item has class: hoverPlay');
-
-            var progressState= setInterval( function() {   
-                if ($item.hasClass('hovering') && !$item.hasClass('hoverStop')){
-
-                    console.log('item has class hovering but not hoverStop');
-
-                    $item.addClass('hoverStop');
-
-                    console.log('so we add hoverStop');
-
-                    $item.find($bottom).addClass(cssClassbottom);
-                    $item.find($topBack).removeClass(cssClass);
-            
-                    $item.find($top).removeAttr('style').transition(
-                        {
-                            perspective:'1000px',
-                            rotateX:'-90deg',
-                            duration:150
-                        },
-                        function(){
-                            $(this).removeAttr('style').removeClass(cssClass);
-                            $item.find($bottomBack).removeClass(cssClassbottom).removeAttr('style').transition(
-                                {
-                                    perspective:'1000px',
-                                    rotateX:'0deg',
-                                    duration:150
-                                },
-                                function(){
-                                    $(this).removeAttr('style');$item.find($bottom).removeClass(cssClassbottom);
-                                    $item.removeClass('hovering hoverPlay hoverStop');
-                                    clearInterval(progressState);
-                                    console.log('done animating the flip, remove class hovering and hoverPlay');
-                                }
-                            );
-                        }
-                    );    
+                    duration:150
                 }
-            },25);
-        }   
-        else{
-            console.log('might jump here if hovePlay isnt here but hovering is');
-            console.log('item has hovering?  ',$item.hasClass('hovering'));
+            );
         }
-       // $item.removeClass('hoverStop hovering');
-    }
-    //carte des section headers
-    else{
+    );
         
-            
-            $item.find($top).removeAttr('style').transition(
-                {
-                    perspective:'1000px',
-                    rotateX:'-90deg',
-                    duration:1000
-                }, 
-                function(){
-                    $(this).removeAttr('style')
-                }
-            );
-            $item.find($bottomBack).removeAttr('style').transition(
+}
+    
+
+
+function flipEnd(item){
+
+    const $item=$(item.currentTarget);
+    const $top=$item.find($('.topCard'));
+    const $bottomBack=$item.find($('.bottomCard__back'));
+
+    $top.removeAttr('style').transition(
+        
+        {
+            perspective:'1000px',
+            rotateX:'-90deg',
+            duration:150
+        }, 
+        function(){
+            $(this).removeAttr('style');
+            $bottomBack.removeAttr('style').transition(
                 {
                     perspective:'1000px',
                     rotateX:'0deg',
-                    duration:1000,
-                    delay:150
+                    duration:150
                 }, 
                 function(){
                     $(this).removeAttr('style')
                 }
             );
-    }
+        }
+    );
+    
+    
 }
