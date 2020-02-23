@@ -3,24 +3,15 @@
   padding: 0;
 }
 
-.flipCard:hover .bottomCard__back {
-  -webkit-transform: rotateX(0deg);
-          transform: rotateX(0deg);
-  border-top: transparent;
-}
-
-.flipCard:hover .topCard {
-  -webkit-transform: rotateX(-90deg);
-          transform: rotateX(-90deg);
-  border-bottom: transparent;
+@font-face {
+  font-family: 'Palette';
+  src: url("../public/Catamaran/Catamaran-SemiBold.ttf");
 }
 
 .navigation {
   width: 20vw;
-  background-color: white;
   margin: auto 2.5vw;
   height: 50vh;
-  background-color: darkgrey;
 }
 
 .nav-menu {
@@ -40,7 +31,7 @@
 
 .item-menu {
   width: 100%;
-  height: 6.25vh;
+  height: 5.55556vh;
   -webkit-perspective: 1000px;
           perspective: 1000px;
 }
@@ -50,7 +41,7 @@
           transform-style: preserve-3d;
   position: absolute;
   width: 100%;
-  height: 6.25vh;
+  height: 5.55556vh;
   border-radius: 10px;
 }
 
@@ -64,16 +55,16 @@
 
 .menu-option::before {
   width: 100%;
-  height: 3.125vh;
-  -webkit-box-shadow: 0px 0px 5px 5px grey;
-          box-shadow: 0px 0px 5px 5px grey;
+  height: 2.77778vh;
+  -webkit-box-shadow: 0px 0px 3px 3px grey;
+          box-shadow: 0px 0px 3px 3px grey;
 }
 
 .menu-option::after {
-  -webkit-box-shadow: 0px 0px 10px 8px black;
-          box-shadow: 0px 0px 10px 8px black;
-  width: 95%;
-  height: 3.125vh;
+  -webkit-box-shadow: 0px 0px 5px 5px black;
+          box-shadow: 0px 0px 5px 5px black;
+  width: 97%;
+  height: 2.77778vh;
   bottom: 0px;
   left: 2px;
 }
@@ -81,8 +72,8 @@
 .menuRoll__left, .menuRoll__right {
   position: absolute;
   bottom: 2.08333vh;
-  width: 10%;
-  height: 1.5625vh;
+  width: 3%;
+  height: 1.38889vh;
   border: 1px #2d2d2d solid;
   border-radius: 6px;
   background-image: -webkit-gradient(linear, left top, left bottom, from(#000), color-stop(#3d3d3d), color-stop(silver), color-stop(#3d3d3d), to(#000));
@@ -90,11 +81,11 @@
 }
 
 .menuRoll__left__top, .menuRoll__right__top {
-  bottom: -2.08333vh;
+  bottom: -1.85185vh;
 }
 
 .menuRoll__left__bottom, .menuRoll__right__bottom {
-  top: -2.08333vh;
+  top: -1.85185vh;
 }
 
 .menuRoll__right {
@@ -110,32 +101,22 @@
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   width: 100%;
-  height: 3.125vh;
+  height: 2.77778vh;
   -webkit-backface-visibility: hidden;
           backface-visibility: hidden;
   overflow: hidden;
   text-align: center;
-  font-size: 5.625vh;
+  font-family: 'Palette';
+  font-size: 4.16667vh;
   color: white;
 }
 
-.halfCardMenu span {
-  position: absolute;
-  left: 0;
-  top: -0.89286vh;
-  width: 100%;
-  height: 3.125vh;
-}
-
-.tophalf {
-  -webkit-transition: all .15s linear;
-  transition: all .15s linear;
-}
-
-.tophalf, .tophalf__back {
+.tophalf, .tophalf--selected, .tophalf__back, .tophalf__back--selected {
   background-image: -webkit-gradient(linear, left top, left bottom, from(#7d7d7d), color-stop(#4d4d4d), to(#0d0d0d));
   background-image: linear-gradient(#7d7d7d, #4d4d4d, #0d0d0d);
-  border-bottom: 1px black solid;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  /* for Safari */
+  background-clip: padding-box;
   border-top: 2px #b2b2b2 solid;
   border-top-left-radius: 7px;
   border-top-right-radius: 7px;
@@ -143,44 +124,90 @@
           transform-origin: bottom center;
 }
 
-.bottomhalf, .bottomhalf__back {
-  top: 3.125vh;
+.tophalf span, .tophalf--selected span, .tophalf__back span, .tophalf__back--selected span {
+  position: absolute;
+  left: 0;
+  top: 1.38889vh;
+  line-height: 2.77778vh;
+  width: 100%;
+  height: 2.77778vh;
+}
+
+.tophalf--selected, .tophalf__back--selected {
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#ffda61), color-stop(#fcb620), to(#d49100));
+  background-image: linear-gradient(#ffda61, #fcb620, #d49100);
+}
+
+.bottomhalf, .bottomhalf--selected, .bottomhalf__back, .bottomhalf__back--selected {
+  top: 2.77778vh;
   background-image: -webkit-gradient(linear, left top, left bottom, from(#1d1d1d), color-stop(#3d3d3d), to(#0d0d0d));
   background-image: linear-gradient(#1d1d1d, #3d3d3d, #0d0d0d);
-  border-top: 1px black solid;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
   border-bottom-left-radius: 7px;
   border-bottom-right-radius: 7px;
 }
 
-.bottomhalf span, .bottomhalf__back span {
-  top: -3.875vh;
-  -webkit-transform-origin: bottom center;
-          transform-origin: bottom center;
+.bottomhalf span, .bottomhalf--selected span, .bottomhalf__back span, .bottomhalf__back--selected span {
+  position: absolute;
+  bottom: 1.21111vh;
+  left: 0;
+  width: 100%;
+  height: 2.77778vh;
+  line-height: 2.77778vh;
+  -webkit-transform-origin: top center;
+          transform-origin: top center;
 }
 
-.bottomhalf__back {
+.bottomhalf--selected, .bottomhalf__back--selected {
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#ffc524), color-stop(#ffd359), to(#b97f00));
+  background-image: linear-gradient(#ffc524, #ffd359, #b97f00);
+}
+
+.bottomhalf__back, .bottomhalf__back--selected {
   -webkit-transform: rotateX(90deg);
           transform: rotateX(90deg);
   -webkit-transform-origin: top center;
           transform-origin: top center;
-  -webkit-transition: all .15s linear .15s;
-  transition: all .15s linear .15s;
 }
 
 .item-menu {
   margin: .5vh auto;
 }
 
-.menu-option:hover .bottomhalf__back {
-  -webkit-transform: rotateX(0deg);
-          transform: rotateX(0deg);
-  border-top: transparent;
+.menuOverlay {
+  position: absolute;
+  height: inherit;
+  width: inherit;
 }
 
-.menu-option:hover .tophalf {
-  -webkit-transform: rotateX(-90deg);
-          transform: rotateX(-90deg);
-  border-bottom: transparent;
+.hover-menu {
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#bebebe), color-stop(#8b8b8b), to(#4e4e4e));
+  background-image: linear-gradient(#bebebe, #8b8b8b, #4e4e4e);
+}
+
+.hover-menu__bottom {
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#747474), color-stop(#4e4e4e), to(#000000));
+  background-image: linear-gradient(#747474, #4e4e4e, #000000);
+}
+
+.activeMenu {
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#ffda61), color-stop(#fcb620), to(#d49100));
+  background-image: linear-gradient(#ffda61, #fcb620, #d49100);
+}
+
+.activeMenu__bottom {
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#ffc524), color-stop(#ffd359), to(#b97f00));
+  background-image: linear-gradient(#ffc524, #ffd359, #b97f00);
+}
+
+.activeMenuHover {
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#ffe388), color-stop(#ffc852), to(#ffb71b));
+  background-image: linear-gradient(#ffe388, #ffc852, #ffb71b);
+}
+
+.activeMenuHover__bottom {
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#ffd54d), color-stop(#ffd375), to(#ffb20b));
+  background-image: linear-gradient(#ffd54d, #ffd375, #ffb20b);
 }
 
 .board {
@@ -199,8 +226,8 @@
 }
 
 .flipperContainer {
-  width: 3.97059vw;
-  height: 8vh;
+  width: 4.62329vw;
+  height: 10vh;
   -webkit-perspective: 1000px;
           perspective: 1000px;
 }
@@ -209,8 +236,8 @@
   -webkit-transform-style: preserve-3d;
           transform-style: preserve-3d;
   position: absolute;
-  width: 3.97059vw;
-  height: 8vh;
+  width: 4.62329vw;
+  height: 10vh;
   border-radius: 10px;
 }
 
@@ -223,38 +250,38 @@
 }
 
 .flipCard::before {
-  width: 3.97059vw;
-  height: 4vh;
-  -webkit-box-shadow: 0px 0px 5px 5px grey;
-          box-shadow: 0px 0px 5px 5px grey;
+  width: 4.62329vw;
+  height: 5vh;
+  -webkit-box-shadow: 0px 0px 3px 3px grey;
+          box-shadow: 0px 0px 3px 3px grey;
 }
 
 .flipCard::after {
-  -webkit-box-shadow: 0px 0px 10px 8px black;
-          box-shadow: 0px 0px 10px 8px black;
-  width: 3.77206vw;
-  height: 4vh;
+  -webkit-box-shadow: 0px 0px 5px 5px black;
+          box-shadow: 0px 0px 5px 5px black;
+  width: 97%;
+  height: 5vh;
   bottom: 0px;
   left: 2px;
 }
 
-.rollLeft, .rollRight {
+.rollRight, .rollLeft {
   position: absolute;
-  bottom: 2.66667vh;
+  bottom: 3.75vh;
   width: 10%;
-  height: 2vh;
+  height: 2.5vh;
   border: 1px #2d2d2d solid;
   border-radius: 6px;
   background-image: -webkit-gradient(linear, left top, left bottom, from(#000), color-stop(#3d3d3d), color-stop(silver), color-stop(#3d3d3d), to(#000));
   background-image: linear-gradient(#000, #3d3d3d, silver, #3d3d3d, #000);
 }
 
-.rollLeft__top, .rollRight__top {
-  bottom: -2.66667vh;
+.rollRight__top, .rollLeft__top {
+  bottom: -3.33333vh;
 }
 
-.rollLeft__bottom, .rollRight__bottom {
-  top: -2.66667vh;
+.rollRight__bottom, .rollLeft__bottom {
+  top: -3.33333vh;
 }
 
 .rollLeft {
@@ -269,33 +296,23 @@
   position: absolute;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
-  width: 3.97059vw;
-  height: 4vh;
+  width: 4.62329vw;
+  height: 5vh;
   -webkit-backface-visibility: hidden;
           backface-visibility: hidden;
   overflow: hidden;
   text-align: center;
-  font-size: 8vh;
+  font-family: 'Palette';
+  font-size: 7.5vh;
   color: white;
 }
 
-.halfCard span {
-  position: absolute;
-  left: 0;
-  top: -1.14286vh;
-  width: 3.97059vw;
-  height: 4vh;
-}
-
-.topCard {
-  -webkit-transition: all .15s linear;
-  transition: all .15s linear;
-}
-
-.topCard, .topCard__back {
+.topCard, .topCard--selected, .topCard__back, .topCard__back--selected {
   background-image: -webkit-gradient(linear, left top, left bottom, from(#7d7d7d), color-stop(#4d4d4d), to(#0d0d0d));
   background-image: linear-gradient(#7d7d7d, #4d4d4d, #0d0d0d);
-  border-bottom: 1px black solid;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  /* for Safari */
+  background-clip: padding-box;
   border-top: 2px #b2b2b2 solid;
   border-top-left-radius: 7px;
   border-top-right-radius: 7px;
@@ -303,40 +320,54 @@
           transform-origin: bottom center;
 }
 
-.bottomCard, .bottomCard__back {
-  top: 4vh;
+.topCard span, .topCard--selected span, .topCard__back span, .topCard__back--selected span {
+  position: absolute;
+  left: 0;
+  top: 2.5vh;
+  line-height: 5vh;
+  width: 4.62329vw;
+  height: 5vh;
+}
+
+.topCard--selected, .topCard__back--selected {
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#ffda61), color-stop(#fcb620), to(#d49100));
+  background-image: linear-gradient(#ffda61, #fcb620, #d49100);
+}
+
+.bottomCard, .bottomCard--selected, .bottomCard__back, .bottomCard__back--selected {
+  top: 5vh;
   background-image: -webkit-gradient(linear, left top, left bottom, from(#1d1d1d), color-stop(#3d3d3d), to(#0d0d0d));
   background-image: linear-gradient(#1d1d1d, #3d3d3d, #0d0d0d);
-  border-top: 1px black solid;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
   border-bottom-left-radius: 7px;
   border-bottom-right-radius: 7px;
 }
 
-.bottomCard span, .bottomCard__back span {
-  top: -4.96vh;
-  -webkit-transform-origin: bottom center;
-          transform-origin: bottom center;
+.bottomCard span, .bottomCard--selected span, .bottomCard__back span, .bottomCard__back--selected span {
+  position: absolute;
+  bottom: 2.18vh;
+  left: 0;
+  width: 4.62329vw;
+  height: 5vh;
+  line-height: 5vh;
+  -webkit-transform-origin: top center;
+          transform-origin: top center;
 }
 
-.bottomCard__back {
+.bottomCard--selected, .bottomCard__back--selected {
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#ffc524), color-stop(#ffd359), to(#b97f00));
+  background-image: linear-gradient(#ffc524, #ffd359, #b97f00);
+}
+
+.bottomCard__back, .bottomCard__back--selected {
   -webkit-transform: rotateX(90deg);
           transform: rotateX(90deg);
   -webkit-transform-origin: top center;
           transform-origin: top center;
-  -webkit-transition: all .15s linear .15s;
-  transition: all .15s linear .15s;
 }
 
-.flipCard:hover .bottomCard__back {
-  -webkit-transform: rotateX(0deg);
-          transform: rotateX(0deg);
-  border-top: transparent;
-}
-
-.flipCard:hover .topCard {
-  -webkit-transform: rotateX(-90deg);
-          transform: rotateX(-90deg);
-  border-bottom: transparent;
+.someClass {
+  color: yellow;
 }
 
 /** Affichage de base**/
