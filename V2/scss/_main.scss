@@ -1,0 +1,17 @@
+body{
+    background-color:black;
+
+}
+header{display:none;}
+
+section{
+    width:100%;
+    height:100vh;
+    .section__main{
+        width:75%;
+        height:80vh;
+        background-color:darkgrey;
+        margin:10vh auto;
+        text-align:center;
+    }
+}

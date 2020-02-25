@@ -1,0 +1,15 @@
+body {
+  background-color: black;
+}
+
+.section__who {
+  width: 100%;
+  height: 100vh;
+}
+
+.section__who .section__main {
+  width: 75%;
+  height: 80vh;
+  background-color: darkgrey;
+}
+/*# sourceMappingURL=main.css.map */
