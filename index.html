@@ -3,15 +3,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="scss/style.css">
+    <link rel="stylesheet" href="css/style.css">
     <title>FX</title>
 </head>
 <body>
     <nav class="navigation">
         <ul class="nav-menu">
-            <div class='item-menu item-menu__accueil'>
+            <div class='item-menu item-menu__accueil' >
                 <!-- Accueil -->
-                <div class="menu-option">
+                <div class="menu-option" data-state="INIT" data-selected="FALSE" id="accueil">
                     <div class="halfCardMenu tophalf__back"><span>Accueil</span></div>
                     <div class="halfCardMenu bottomhalf"><span>Accueil</span></div>
                     <div class="halfCardMenu tophalf"><span>Accueil</span></div>
@@ -19,10 +19,11 @@
                     <div class="menuRoll__left"></div>
                     <div class="menuRoll__right"></div>
                 </div>
+                <div class="menuOverlay"></div>
             </div>
             <div class='item-menu item-menu__apercu' >
                 <!-- Apercu -->
-                <div class="menu-option">
+                <div class="menu-option" data-state="INIT" data-selected="FALSE" id="apercu">
                     <div class="halfCardMenu tophalf__back"><span>Apercu</span></div>
                     <div class="halfCardMenu bottomhalf"><span>Apercu</span></div>
                     <div class="halfCardMenu tophalf"><span>Apercu</span></div>
@@ -30,10 +31,11 @@
                     <div class="menuRoll__left"></div>
                     <div class="menuRoll__right"></div>
                 </div>
+                <div class="menuOverlay"></div>
             </div>
             <div class='item-menu item-menu__design'>
                 <!-- Design -->
-                <div class="menu-option">
+                <div class="menu-option" data-state="INIT" data-selected="FALSE" id="design">
                     <div class="halfCardMenu tophalf__back"><span>Design</span></div>
                     <div class="halfCardMenu bottomhalf"><span>Design</span></div>
                     <div class="halfCardMenu tophalf"><span>Design</span></div>
@@ -41,10 +43,11 @@
                     <div class="menuRoll__left"></div>
                     <div class="menuRoll__right"></div>
                 </div>
+                <div class="menuOverlay"></div>
             </div>
             <div class='item-menu item-menu__audio-visuel'>
                 <!-- Audio-visuel -->
-                <div class="menu-option">
+                <div class="menu-option" data-state="INIT" data-selected="FALSE" id="audioV">
                     <div class="halfCardMenu tophalf__back"><span>Audio-Visuel</span></div>
                     <div class="halfCardMenu bottomhalf"><span>Audio-Visuel</span></div>
                     <div class="halfCardMenu tophalf"><span>Audio-Visuel</span></div>
@@ -52,10 +55,11 @@
                     <div class="menuRoll__left"></div>
                     <div class="menuRoll__right"></div>
                 </div>
+                <div class="menuOverlay"></div>
             </div>
             <div class='item-menu item-menu__jeux'>
                 <!-- Jeux -->
-                <div class="menu-option">
+                <div class="menu-option" data-state="INIT" data-selected="FALSE" id="jeux">
                     <div class="halfCardMenu tophalf__back"><span>Jeux</span></div>
                     <div class="halfCardMenu bottomhalf"><span>Jeux</span></div>
                     <div class="halfCardMenu tophalf"><span>Jeux</span></div>
@@ -63,10 +67,11 @@
                     <div class="menuRoll__left"></div>
                     <div class="menuRoll__right"></div>
                 </div>
+                <div class="menuOverlay"></div>
             </div>
             <div class='item-menu item-menu__prototype'>
                 <!-- Prototype -->
-                <div class="menu-option">
+                <div class="menu-option" data-state="INIT" data-selected="FALSE" id="prototype">
                     <div class="halfCardMenu tophalf__back"><span>Prototype</span></div>
                     <div class="halfCardMenu bottomhalf"><span>Prototype</span></div>
                     <div class="halfCardMenu tophalf"><span>Prototype</span></div>
@@ -74,10 +79,11 @@
                     <div class="menuRoll__left"></div>
                     <div class="menuRoll__right"></div>
                 </div>
+                <div class="menuOverlay"></div>
             </div>
             <div class='item-menu item-menu__contact'>
                 <!-- Contact -->
-                <div class="menu-option">
+                <div class="menu-option" data-state="INIT" data-selected="FALSE" id="contact">
                     <div class="halfCardMenu tophalf__back">
                         <span>Contact</span>
                     </div>
@@ -97,6 +103,7 @@
                     <div class="menuRoll__left"></div>
                     <div class="menuRoll__right"></div>
                 </div>
+                <div class="menuOverlay"></div>
             </div>
         </ul>
     </nav>
@@ -359,7 +366,7 @@
     <footer>
         <script type="text/javascript" src="js/jquery.js"></script>
         <script type="text/javascript" src="js/transit.js"></script>
-        <script type="text/javascript" src="js/navigation.js"></script>
+        <script type="text/javascript" src="js/nav3.js"></script>
     </footer>
 </body>
 </html>

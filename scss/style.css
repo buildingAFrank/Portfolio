@@ -174,9 +174,35 @@
   margin: .5vh auto;
 }
 
-.hover-item {
+.menuOverlay {
+  position: absolute;
+  height: inherit;
+  width: inherit;
+}
+
+.hover-menu {
   background-image: -webkit-gradient(linear, left top, left bottom, from(#bebebe), color-stop(#8b8b8b), to(#4e4e4e));
   background-image: linear-gradient(#bebebe, #8b8b8b, #4e4e4e);
+}
+
+.hover-menu__bottom {
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#747474), color-stop(#000000), to(#3a3a3a));
+  background-image: linear-gradient(#747474, #000000, #3a3a3a);
+}
+
+.activeMenu {
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#ffda61), color-stop(#fcb620), to(#d49100));
+  background-image: linear-gradient(#ffda61, #fcb620, #d49100);
+}
+
+.activeMenu__bottom {
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#ffc524), color-stop(#ffd359), to(#b97f00));
+  background-image: linear-gradient(#ffc524, #ffd359, #b97f00);
+}
+
+.activeMenuHover {
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#ffda61), color-stop(#fcb620), to(#d49100));
+  background-image: linear-gradient(#ffda61, #fcb620, #d49100);
 }
 
 .board {
@@ -323,6 +349,10 @@
           transform: rotateX(90deg);
   -webkit-transform-origin: top center;
           transform-origin: top center;
+}
+
+.someClass {
+  color: yellow;
 }
 
 /** Affichage de base**/
