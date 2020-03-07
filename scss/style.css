@@ -8,16 +8,6 @@
   src: url("../public/Catamaran/Catamaran-SemiBold.ttf");
 }
 
-.flipCard:hover .bottomCard__back {
-  -webkit-transform: rotateX(0deg);
-          transform: rotateX(0deg);
-}
-
-.flipCard:hover .topCard {
-  -webkit-transform: rotateX(-90deg);
-          transform: rotateX(-90deg);
-}
-
 .navigation {
   width: 20vw;
   margin: auto 2.5vw;
@@ -121,7 +111,7 @@
   color: white;
 }
 
-.tophalf, .tophalf__back {
+.tophalf, .tophalf--selected, .tophalf__back, .tophalf__back--selected {
   background-image: -webkit-gradient(linear, left top, left bottom, from(#7d7d7d), color-stop(#4d4d4d), to(#0d0d0d));
   background-image: linear-gradient(#7d7d7d, #4d4d4d, #0d0d0d);
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
@@ -134,7 +124,7 @@
           transform-origin: bottom center;
 }
 
-.tophalf span, .tophalf__back span {
+.tophalf span, .tophalf--selected span, .tophalf__back span, .tophalf__back--selected span {
   position: absolute;
   left: 0;
   top: 1.38889vh;
@@ -143,7 +133,12 @@
   height: 2.77778vh;
 }
 
-.bottomhalf, .bottomhalf__back {
+.tophalf--selected, .tophalf__back--selected {
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#ffda61), color-stop(#fcb620), to(#d49100));
+  background-image: linear-gradient(#ffda61, #fcb620, #d49100);
+}
+
+.bottomhalf, .bottomhalf--selected, .bottomhalf__back, .bottomhalf__back--selected {
   top: 2.77778vh;
   background-image: -webkit-gradient(linear, left top, left bottom, from(#1d1d1d), color-stop(#3d3d3d), to(#0d0d0d));
   background-image: linear-gradient(#1d1d1d, #3d3d3d, #0d0d0d);
@@ -152,7 +147,7 @@
   border-bottom-right-radius: 7px;
 }
 
-.bottomhalf span, .bottomhalf__back span {
+.bottomhalf span, .bottomhalf--selected span, .bottomhalf__back span, .bottomhalf__back--selected span {
   position: absolute;
   bottom: 1.21111vh;
   left: 0;
@@ -163,7 +158,12 @@
           transform-origin: top center;
 }
 
-.bottomhalf__back {
+.bottomhalf--selected, .bottomhalf__back--selected {
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#ffc524), color-stop(#ffd359), to(#b97f00));
+  background-image: linear-gradient(#ffc524, #ffd359, #b97f00);
+}
+
+.bottomhalf__back, .bottomhalf__back--selected {
   -webkit-transform: rotateX(90deg);
           transform: rotateX(90deg);
   -webkit-transform-origin: top center;
@@ -181,13 +181,13 @@
 }
 
 .hover-menu {
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#bebebe), color-stop(#8b8b8b), to(#4e4e4e));
-  background-image: linear-gradient(#bebebe, #8b8b8b, #4e4e4e);
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#bebebe), color-stop(#000000), to(#4e4e4e));
+  background-image: linear-gradient(#bebebe, #000000, #4e4e4e);
 }
 
 .hover-menu__bottom {
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#747474), color-stop(#000000), to(#3a3a3a));
-  background-image: linear-gradient(#747474, #000000, #3a3a3a);
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#747474), color-stop(#4e4e4e), to(#000000));
+  background-image: linear-gradient(#747474, #4e4e4e, #000000);
 }
 
 .activeMenu {
@@ -201,8 +201,13 @@
 }
 
 .activeMenuHover {
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#ffda61), color-stop(#fcb620), to(#d49100));
-  background-image: linear-gradient(#ffda61, #fcb620, #d49100);
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#ffe388), color-stop(#ffc852), to(#ffb71b));
+  background-image: linear-gradient(#ffe388, #ffc852, #ffb71b);
+}
+
+.activeMenuHover__bottom {
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#ffd54d), color-stop(#ffd375), to(#ffb20b));
+  background-image: linear-gradient(#ffd54d, #ffd375, #ffb20b);
 }
 
 .board {
@@ -302,7 +307,7 @@
   color: white;
 }
 
-.topCard, .topCard__back {
+.topCard, .topCard--selected, .topCard__back, .topCard__back--selected {
   background-image: -webkit-gradient(linear, left top, left bottom, from(#7d7d7d), color-stop(#4d4d4d), to(#0d0d0d));
   background-image: linear-gradient(#7d7d7d, #4d4d4d, #0d0d0d);
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
@@ -315,7 +320,7 @@
           transform-origin: bottom center;
 }
 
-.topCard span, .topCard__back span {
+.topCard span, .topCard--selected span, .topCard__back span, .topCard__back--selected span {
   position: absolute;
   left: 0;
   top: 2.5vh;
@@ -324,7 +329,12 @@
   height: 5vh;
 }
 
-.bottomCard, .bottomCard__back {
+.topCard--selected, .topCard__back--selected {
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#ffda61), color-stop(#fcb620), to(#d49100));
+  background-image: linear-gradient(#ffda61, #fcb620, #d49100);
+}
+
+.bottomCard, .bottomCard--selected, .bottomCard__back, .bottomCard__back--selected {
   top: 5vh;
   background-image: -webkit-gradient(linear, left top, left bottom, from(#1d1d1d), color-stop(#3d3d3d), to(#0d0d0d));
   background-image: linear-gradient(#1d1d1d, #3d3d3d, #0d0d0d);
@@ -333,7 +343,7 @@
   border-bottom-right-radius: 7px;
 }
 
-.bottomCard span, .bottomCard__back span {
+.bottomCard span, .bottomCard--selected span, .bottomCard__back span, .bottomCard__back--selected span {
   position: absolute;
   bottom: 2.18vh;
   left: 0;
@@ -344,7 +354,12 @@
           transform-origin: top center;
 }
 
-.bottomCard__back {
+.bottomCard--selected, .bottomCard__back--selected {
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#ffc524), color-stop(#ffd359), to(#b97f00));
+  background-image: linear-gradient(#ffc524, #ffd359, #b97f00);
+}
+
+.bottomCard__back, .bottomCard__back--selected {
   -webkit-transform: rotateX(90deg);
           transform: rotateX(90deg);
   -webkit-transform-origin: top center;
