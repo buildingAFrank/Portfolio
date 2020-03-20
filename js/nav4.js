@@ -19,9 +19,9 @@ EvToObj.prototype.getSelectedState=function(){return this.$item.attr('data-selec
 EvToObj.prototype.setHoverState=function(state){return this.$item.attr("data-hovering", state);}
 EvToObj.prototype.getHoverState=function(){return this.$item.attr('data-hovering');}
 
-const time = 1000;
+const time = 150;
 
-classes=["",""];
+defaultClasses=["",""];
 hoverClasses=["hover-menu","hover-menu__bottom"];
 selectedClasses=["activeMenu","activeMenu__bottom"];
 selectedHoverClasses=["activeMenuHover","activeMenuHover__bottom"]
@@ -64,9 +64,11 @@ function stateCheck(navEvent){
     if(mouseEvent=="mouseenter"){
         userEvent.setHoverState("TRUE")
         if($menuAnimationState==="INIT"){
+            console.log('is init');
             if($clickedState === "FALSE"){
                 flipMenuStart(userEvent,hoverClasses);
             }else{
+                console.log('is selected');
                 flipMenuStart(userEvent,selectedHoverClasses);
             }
         }
@@ -80,22 +82,7 @@ function stateCheck(navEvent){
         }
         
     }
-    //Mouse clicked event
-    if(mouseEvent=="click"){
-        console.log('click');
-        
-        if(userEvent.getSelectedState() === "FALSE"){
-            userEvent.setSelectedState("TRUE");
-
-            if($menuAnimationState==="ACTIVE"){
-                selectedMenu(userEvent,selectedHoverClasses);
-            }
-           
-        }
-        else{
-            userEvent.setSelectedState("FALSE");
-        }
-    }
+   
     // Mouse leave event
     if(mouseEvent=="mouseleave"){
         userEvent.setHoverState("FALSE");
@@ -106,10 +93,26 @@ function stateCheck(navEvent){
         }else {
             if($clickedState === "FALSE"){
                 flipMenuReset(userEvent,hoverClasses);
-            }else{
-                flipMenuReset(userEvent,selectedHoverClasses);
             }
-            
+            else{
+                flipMenuReset(userEvent,selectedClasses);
+            }
+        }
+    }
+     //Mouse click event
+     if(mouseEvent=="click"){
+        console.log('click');
+        
+        if(userEvent.getSelectedState() === "FALSE"){
+            userEvent.setSelectedState("TRUE");
+
+            if(userEvent.getAnimState()==="ACTIVE"){
+                selectedMenu(userEvent,selectedHoverClasses);
+            }
+           
+        }
+        else{
+            userEvent.setSelectedState("FALSE");
         }
     }
 }
@@ -117,27 +120,42 @@ function stateCheck(navEvent){
 // Pour changer les classe de base lors de la selection du menu
 function selectedMenu(ref,classes){
     //on select
-    if(ref.getAnimState()==="ACTIVE"){
+    console.log('function selected menu');
+    if(ref.getAnimState()==="ACTIVE" && ref.getSelectedState()==="TRUE"){
+
         // prepare menu icone for selected status animation 
         ref.$top.removeAttr('style');
         ref.$bottom.addClass('hover-menu__bottom');
         ref.$topBack.addClass(classes[0]).removeClass('hover-menu');
         ref.$bottomBack.removeAttr('style').addClass(classes[1]);
+
+        // run animation function
         animateToSelected(ref,classes,function(){
+
             ref.$top.removeAttr('style').addClass(classes[0]).removeClass('hover-menu');
             ref.$bottom.removeClass('hover-menu__bottom').addClass(classes[1]);
             ref.$bottomBack.removeAttr('style').removeClass('hover-menu__bottom');
+
             if(ref.getAnimState() ==='ACTIVE' && ref.getHoverState() ==="FALSE" && ref.getSelectedState() ==="TRUE"){
                 //console.log('mouse is not hovering element, about to run flipMenuReset');
-                
+                ref.$top.addClass(selectedClasses[0]);
                 flipMenuReset(ref,selectedClasses);
             }
         });
     }   
+    if(ref.getAnimState()==="ACTIVE"&& ref.getSelectedState()==="TRUE" && ref.getHoverState()==="FALSE"){
+        
+    }
 }
 
+function changeBaseClass(){
+
+
+}
+
+
 function flipMenuStart(ref,classes){
-   
+    console.log('function flip menu start');
     if((ref.getAnimState() === 'INIT' || ref.getAnimState() === 'TOINIT' )&& ref.getHoverState() ==="TRUE"){ 
 
         if(ref.getSelectedState()==="FALSE"){
@@ -164,14 +182,32 @@ function flipMenuStart(ref,classes){
             })
         }
         if(ref.getSelectedState()==="TRUE"){
-
+            ref.setAnimState("TOACTIVE");
+            //console.log("Current state of ",$item.attr('id')+" :",getAnimationState($item));
+            animateToActive(ref,classes, function() {
+                //console.log("current state in CB of flipMenuStart:",getAnimationState($item));
+                console.log('current selected state ',ref.getSelectedState());
+                if(ref.getHoverState() ==="FALSE"){
+                    //console.log('mouse is not hovering element, about to run flipMenuReset');
+                    if(ref.getSelectedState() ==="FALSE"){
+                        flipMenuReset(ref,classes);
+                    }
+                    // else{
+                    //     selectedMenu(ref,selectedClasses);
+                    // }
+                    
+                }else {
+                    //console.log('setting state to ACTIVE')
+                    ref.setAnimState('ACTIVE')
+                }
+            })
         }
         
     }
 }
 
 function animateToActive(ref,classes, cb) {
-
+    console.log('function animateToActive');
     const cssClass = classes[0];
     const cssClassBottom = classes[1];
     
@@ -208,6 +244,7 @@ function animateToActive(ref,classes, cb) {
 }
 
 function animateToSelected(ref,classes,cb) {
+    console.log('function animateToSelected');
     const cssClass = classes[0];
     const cssClassBottom = classes[1];
 console.log('animate to selected');
@@ -242,6 +279,7 @@ console.log('animate to selected');
 }
 
 function flipMenuReset(ref,classes){
+    console.log('function flipMenuReset');
     //finished to hover anim, cursor is not hovering any more and menu is not selected
     if(ref.getAnimState() === 'ACTIVE' && ref.getHoverState()==="FALSE" && ref.getSelectedState()==="FALSE"){
         //console.log('starting menu Reset')
@@ -249,9 +287,9 @@ function flipMenuReset(ref,classes){
         ref.setAnimState('TOINIT');
        // console.log("Current state of ",$item.attr('id')+" :",getAnimationState($item));
         if(ref.getSelectedState()==="TRUE"){
-            ref.$topBack.removeClass("hover-menu").addClass('tophalf__back--selected');
-            ref.$top.removeClass("hover-menu").addClass('tophalf--selected');
-            ref.$bottom.removeClass("hover-menu__bottom").addClass('bottomhalf--selected');
+            ref.$topBack.removeClass("hover-menu");
+            ref.$top.removeClass("hover-menu");
+            ref.$bottom.removeClass("hover-menu__bottom");
             ref.$bottomBack.removeClass("hover-menu__bottom");
         }
         animateToInit(ref, classes, function(){
@@ -269,7 +307,10 @@ function flipMenuReset(ref,classes){
         ref.$top.addClass(classes[0]);
         ref.$bottom.addClass(classes[1]);
         
-        animateToInit(ref,classes)
+        animateToInit(ref,classes,function(){
+
+            ref.setAnimState('INIT')
+        })
     }
     if(ref.getAnimState() === 'TOACTIVE' && ref.getSelectedState() === "TRUE"){
             ref.setAnimState('ACTIVE')
@@ -279,6 +320,7 @@ function flipMenuReset(ref,classes){
 
 function animateToInit(ref,classes, cb) {
     //console.log("animating reset");
+    console.log('function AnimateToInit');
 
     const cssClass = classes[0];
     const cssClassBottom = classes[1];
