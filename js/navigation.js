@@ -30,9 +30,7 @@ EvToObj.prototype.getHoverState = function() {
 };
 
 let activeMenu;
-
 const time = 150;
-
 const defaultClasses = ['', ''];
 const hoverClasses = ['hover-menu', 'hover-menu__bottom'];
 const selectedClasses = ['activeMenu', 'activeMenu__bottom'];
@@ -48,14 +46,6 @@ $().ready(function() {
   //menu selection
   $('.menuOverlay').click(stateCheck);
 });
-
-/* 
-  INIT
-  TOACTIVE
-  ACTIVE
-  TOINIT
-  
-  */
 
 /**
  * Analyse l'appel d'evenement et appel la fonction necessaire
@@ -96,54 +86,36 @@ function stateCheck(navEvent) {
   }
   //Mouse click event
   if (mouseEvent == 'click') {
+    //active un item du menu
     if (userEvent.getSelectedState() === 'FALSE') {
-      if (activeMenu === undefined) {
-        activeMenu = userEvent;
-      } else if (activeMenu !== userEvent) {
-        if (activeMenu.getSelectedState() === 'TRUE') {
-          activeMenu.setSelectedState('FALSE');
-          deselectedHoverClassStart(activeMenu);
-        }
-      }
-      activeMenu = userEvent;
-      let ObjChoisi = new TitreSection(userEvent.menuId);
-      placerLettre(ObjChoisi, $titleCard, '__back', function() {
-        animateTitle($titleCard, function() {
-          placerLettre(ObjChoisi, $titleCard, '', function() {
-            clrAnim($titleCard);
-          });
-        });
-      });
       userEvent.setSelectedState('TRUE');
       selectedHoverClassStart(userEvent);
-      //fonction animation contenu
-    } else {
+      let ObjChoisi = new TitreSection(userEvent.menuId);
+      //toute premiere selection de l'internaute
+      if (activeMenu === undefined) {
+        activeMenu = userEvent;
+        openSectionAnim(ObjChoisi, $titleCard);
+      } else if (activeMenu !== userEvent) {
+        if (activeMenu.getSelectedState() === 'TRUE') {
+          // l'item de navigation selectionner precedement
+          activeMenu.setSelectedState('FALSE');
+          deselectedHoverClassStart(activeMenu);
+          closeSectionAnim(ObjChoisi, $titleCard);
+          activeMenu = userEvent;
+        }
+      } else {
+        activeMenu = userEvent;
+        openSectionAnim(ObjChoisi, $titleCard);
+      }
+    }
+    //choisi un item deja s/lectionner
+    else {
       userEvent.setSelectedState('FALSE');
       deselectedHoverClassStart(userEvent);
     }
   }
 }
-
-function selectedHoverClassStart(ref) {
-  const { $top, $bottom, $topBack, $bottomBack } = ref;
-  $bottom.addClass('hover-menu__bottom');
-  $top.removeAttr('style');
-  $bottomBack.removeAttr('style');
-  ref.setAnimState('INIT');
-  flipSelectedMenuStart(ref);
-}
-function deselectedHoverClassStart(ref) {
-  const { $top, $bottom, $topBack, $bottomBack } = ref;
-  if (ref.getSelectedState() === 'TRUE' || ref.getHoverState() === 'TRUE') {
-    $bottom.addClass('activeMenuHover__bottom');
-  }
-
-  $top.removeAttr('style');
-  $bottomBack.removeAttr('style');
-  ref.setAnimState('INIT');
-  flipDeselectedMenuStart(ref);
-}
-
+/**animation initial a hovering et retour */
 function flipMenuStart(ref, classes) {
   if (
     //animation is init or toinit, mouse is in hover and item not selected
@@ -159,6 +131,94 @@ function flipMenuStart(ref, classes) {
       }
     });
   }
+}
+function animateToActive(ref, classes, cb) {
+  const cssClass = classes[0];
+  const cssClassBottom = classes[1];
+
+  // change color of top back panel
+  ref.$topBack.addClass(cssClass);
+  // start animation
+  ref.$top.transition(
+    {
+      perspective: '1000px',
+      rotateX: '-90deg',
+      duration: time
+    },
+    function() {
+      ref.$top.addClass(cssClass);
+      // ANIMATE BOTTOM WHEN TOP IS DONE
+      ref.$bottomBack.addClass(cssClassBottom).transition(
+        {
+          perspective: '1000px',
+          rotateX: '0deg',
+          duration: time
+        },
+        function() {
+          ref.setAnimState('ACTIVE');
+
+          cb();
+        }
+      );
+    }
+  );
+}
+function flipMenuReset(ref, classes) {
+  if (ref.getAnimState() === 'ACTIVE' && ref.getHoverState() === 'FALSE') {
+    ref.setAnimState('TOINIT');
+    animateToInit(ref, classes, function() {
+      ref.setAnimState('INIT');
+    });
+  }
+  if (ref.getAnimState() === 'TOACTIVE') {
+    ref.setAnimState('ACTIVE');
+    flipMenuReset(ref, classes);
+  }
+}
+function animateToInit(ref, classes, cb) {
+  const cssClass = classes[0];
+  const cssClassBottom = classes[1];
+
+  ref.$bottom.addClass(cssClassBottom);
+  ref.$topBack.removeClass(cssClass);
+
+  ref.$top.removeAttr('style').transition(
+    {
+      perspective: '1000px',
+      rotateX: '-90deg',
+      duration: time
+    },
+    function() {
+      $(this)
+        .removeAttr('style')
+        .removeClass(cssClass);
+      ref.$bottomBack
+        .removeClass(cssClassBottom)
+        .removeAttr('style')
+        .transition(
+          {
+            perspective: '1000px',
+            rotateX: '0deg',
+            duration: time
+          },
+          function() {
+            // Reset style
+            $(this).removeAttr('style');
+            ref.$bottom.removeClass(cssClassBottom);
+            cb();
+          }
+        );
+    }
+  );
+}
+
+function selectedHoverClassStart(ref) {
+  const { $top, $bottom, $topBack, $bottomBack } = ref;
+  $bottom.addClass('hover-menu__bottom');
+  $top.removeAttr('style');
+  $bottomBack.removeAttr('style');
+  ref.setAnimState('INIT');
+  flipSelectedMenuStart(ref);
 }
 
 function flipSelectedMenuStart(ref) {
@@ -188,6 +248,62 @@ function flipSelectedMenuStart(ref) {
   }
 }
 
+function animateToSelectedActive(ref, cb) {
+  // change color of top back panel
+  ref.$topBack.addClass([selectedClasses[0], selectedHoverClasses[0]]);
+  // start animation
+  ref.$top.transition(
+    {
+      perspective: '1000px',
+      rotateX: '-90deg',
+      duration: time
+    },
+    function() {
+      ref.$top.addClass([selectedClasses[0], selectedHoverClasses[0]]);
+      // ANIMATE BOTTOM WHEN TOP IS DONE
+      ref.$bottomBack
+        .addClass([selectedClasses[1], selectedHoverClasses[1]])
+        .transition(
+          {
+            perspective: '1000px',
+            rotateX: '0deg',
+            duration: time
+          },
+          function() {
+            ref.setAnimState('ACTIVE');
+
+            cb();
+          }
+        );
+    }
+  );
+}
+
+function flipSelectedMenuReset(ref, classes) {
+  if (ref.getAnimState() === 'ACTIVE' && ref.getHoverState() === 'FALSE') {
+    ref.setAnimState('TOINIT');
+    animateToInit(ref, classes, function() {
+      ref.setAnimState('INIT');
+    });
+  }
+  if (ref.getAnimState() === 'TOACTIVE') {
+    ref.setAnimState('ACTIVE');
+    flipMenuReset(ref, classes);
+  }
+}
+
+function deselectedHoverClassStart(ref) {
+  const { $top, $bottom, $topBack, $bottomBack } = ref;
+  if (ref.getSelectedState() === 'TRUE' || ref.getHoverState() === 'TRUE') {
+    $bottom.addClass('activeMenuHover__bottom');
+  }
+
+  $top.removeAttr('style');
+  $bottomBack.removeAttr('style');
+  ref.setAnimState('INIT');
+  flipDeselectedMenuStart(ref);
+}
+
 function flipDeselectedMenuStart(ref) {
   if (
     (ref.getAnimState() === 'INIT' || ref.getAnimState() === 'TOINIT') &&
@@ -199,7 +315,7 @@ function flipDeselectedMenuStart(ref) {
       ref.$bottom
         .removeClass([selectedClasses[1], selectedHoverClasses[1]])
         .addClass(hoverClasses[1]);
-      ref.$bottomBack.removeClass('hover-menu__bottom');
+      // ref.$bottomBack.removeClass('hover-menu__bottom');
       if (ref.getHoverState() === 'FALSE') {
         flipSelectedMenuReset(ref, hoverClasses);
       } else {
@@ -221,6 +337,7 @@ function flipDeselectedMenuStart(ref) {
     });
   }
 }
+
 function animateToDeselected(ref, cb) {
   // change color of top back panel
   if (ref.getSelectedState() === 'TRUE') {
@@ -257,7 +374,9 @@ function animateToDeselected(ref, cb) {
       }
     );
   } else {
-    ref.$topBack.removeClass([selectedClasses[0], selectedHoverClasses[0]]);
+    ref.$topBack
+      .removeClass([selectedClasses[0], selectedHoverClasses[0]])
+      .addClass(hoverClasses[0]);
     // start animation
     ref.$top.transition(
       {
@@ -270,6 +389,7 @@ function animateToDeselected(ref, cb) {
         // ANIMATE BOTTOM WHEN TOP IS DONE
         ref.$bottomBack
           .removeClass([selectedClasses[1], selectedHoverClasses[1]])
+          .addClass(hoverClasses[1])
           .transition(
             {
               perspective: '1000px',
@@ -285,130 +405,4 @@ function animateToDeselected(ref, cb) {
       }
     );
   }
-}
-
-function animateToSelectedActive(ref, cb) {
-  // change color of top back panel
-  ref.$topBack.addClass([selectedClasses[0], selectedHoverClasses[0]]);
-  // start animation
-  ref.$top.transition(
-    {
-      perspective: '1000px',
-      rotateX: '-90deg',
-      duration: time
-    },
-    function() {
-      ref.$top.addClass([selectedClasses[0], selectedHoverClasses[0]]);
-      // ANIMATE BOTTOM WHEN TOP IS DONE
-      ref.$bottomBack
-        .addClass([selectedClasses[1], selectedHoverClasses[1]])
-        .transition(
-          {
-            perspective: '1000px',
-            rotateX: '0deg',
-            duration: time
-          },
-          function() {
-            ref.setAnimState('ACTIVE');
-
-            cb();
-          }
-        );
-    }
-  );
-}
-
-function animateToActive(ref, classes, cb) {
-  const cssClass = classes[0];
-  const cssClassBottom = classes[1];
-
-  // change color of top back panel
-  ref.$topBack.addClass(cssClass);
-  // start animation
-  ref.$top.transition(
-    {
-      perspective: '1000px',
-      rotateX: '-90deg',
-      duration: time
-    },
-    function() {
-      ref.$top.addClass(cssClass);
-      // ANIMATE BOTTOM WHEN TOP IS DONE
-      ref.$bottomBack.addClass(cssClassBottom).transition(
-        {
-          perspective: '1000px',
-          rotateX: '0deg',
-          duration: time
-        },
-        function() {
-          ref.setAnimState('ACTIVE');
-
-          cb();
-        }
-      );
-    }
-  );
-}
-
-function flipMenuReset(ref, classes) {
-  if (ref.getAnimState() === 'ACTIVE' && ref.getHoverState() === 'FALSE') {
-    ref.setAnimState('TOINIT');
-    animateToInit(ref, classes, function() {
-      ref.setAnimState('INIT');
-    });
-  }
-  if (ref.getAnimState() === 'TOACTIVE') {
-    ref.setAnimState('ACTIVE');
-    flipMenuReset(ref, classes);
-  }
-}
-
-function flipSelectedMenuReset(ref, classes) {
-  if (ref.getAnimState() === 'ACTIVE' && ref.getHoverState() === 'FALSE') {
-    ref.setAnimState('TOINIT');
-    animateToInit(ref, classes, function() {
-      ref.setAnimState('INIT');
-    });
-  }
-  if (ref.getAnimState() === 'TOACTIVE') {
-    ref.setAnimState('ACTIVE');
-    flipMenuReset(ref, classes);
-  }
-}
-
-function animateToInit(ref, classes, cb) {
-  const cssClass = classes[0];
-  const cssClassBottom = classes[1];
-
-  ref.$bottom.addClass(cssClassBottom);
-  ref.$topBack.removeClass(cssClass);
-
-  ref.$top.removeAttr('style').transition(
-    {
-      perspective: '1000px',
-      rotateX: '-90deg',
-      duration: time
-    },
-    function() {
-      $(this)
-        .removeAttr('style')
-        .removeClass(cssClass);
-      ref.$bottomBack
-        .removeClass(cssClassBottom)
-        .removeAttr('style')
-        .transition(
-          {
-            perspective: '1000px',
-            rotateX: '0deg',
-            duration: time
-          },
-          function() {
-            // Reset style
-            $(this).removeAttr('style');
-            ref.$bottom.removeClass(cssClassBottom);
-            cb();
-          }
-        );
-    }
-  );
 }

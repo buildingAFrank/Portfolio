@@ -56,17 +56,17 @@
 .menu-option::before {
   width: 100%;
   height: 2.77778vh;
-  -webkit-box-shadow: 0px 0px 3px 3px grey;
-          box-shadow: 0px 0px 3px 3px grey;
+  -webkit-box-shadow: 0px 0px 15px 3px grey;
+          box-shadow: 0px 0px 15px 3px grey;
 }
 
 .menu-option::after {
-  -webkit-box-shadow: 0px 0px 5px 5px black;
-          box-shadow: 0px 0px 5px 5px black;
-  width: 97%;
+  -webkit-box-shadow: 0px 0px 15px 3px black;
+          box-shadow: 0px 0px 15px 3px black;
+  width: 100%;
   height: 2.77778vh;
   bottom: 0px;
-  left: 2px;
+  margin: auto;
 }
 
 .menuRoll__left, .menuRoll__right {
@@ -181,33 +181,33 @@
 }
 
 .hover-menu {
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#bebebe), color-stop(#000000), to(#4e4e4e));
-  background-image: linear-gradient(#bebebe, #000000, #4e4e4e);
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#bebebe), color-stop(#5f5f5f), to(#2c2c2c));
+  background-image: linear-gradient(#bebebe, #5f5f5f, #2c2c2c);
 }
 
 .hover-menu__bottom {
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#747474), color-stop(#4e4e4e), to(#000000));
-  background-image: linear-gradient(#747474, #4e4e4e, #000000);
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#3f3f3f), color-stop(#6b6b6b), to(#000000));
+  background-image: linear-gradient(#3f3f3f, #6b6b6b, #000000);
 }
 
 .activeMenu {
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#ffda61), color-stop(#fc4c20), to(#d49100));
-  background-image: linear-gradient(#ffda61, #fc4c20, #d49100);
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#ffda61), color-stop(#f6be45), to(#c38b11));
+  background-image: linear-gradient(#ffda61, #f6be45, #c38b11);
 }
 
 .activeMenu__bottom {
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#ffc524), color-stop(#ff6c59), to(#b97f00));
-  background-image: linear-gradient(#ffc524, #ff6c59, #b97f00);
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#ffc524), color-stop(#ffd359), to(#b97f00));
+  background-image: linear-gradient(#ffc524, #ffd359, #b97f00);
 }
 
 .activeMenuHover {
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#ffe388), color-stop(#ffc852), to(#ffb71b));
-  background-image: linear-gradient(#ffe388, #ffc852, #ffb71b);
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#fde9a8), color-stop(#f6dc67), to(#f0bc12));
+  background-image: linear-gradient(#fde9a8, #f6dc67, #f0bc12);
 }
 
 .activeMenuHover__bottom {
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#ffd54d), color-stop(#ffd375), to(#ffb20b));
-  background-image: linear-gradient(#ffd54d, #ffd375, #ffb20b);
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#f6be24), color-stop(#f6cd5c), to(#db9705));
+  background-image: linear-gradient(#f6be24, #f6cd5c, #db9705);
 }
 
 .board {
@@ -223,6 +223,16 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  overflow: hidden;
+}
+
+.board .sectionContent {
+  border: 1px solid #ffd359;
+  background-color: #2c2c2c;
+  position: relative;
+  left: 0;
+  width: 0;
+  height: 0;
 }
 
 .flipperContainer {
@@ -252,17 +262,17 @@
 .flipCard::before {
   width: 4.62329vw;
   height: 5vh;
-  -webkit-box-shadow: 0px 0px 3px 3px grey;
-          box-shadow: 0px 0px 3px 3px grey;
+  -webkit-box-shadow: 0px 0px 15px 3px grey;
+          box-shadow: 0px 0px 15px 3px grey;
 }
 
 .flipCard::after {
-  -webkit-box-shadow: 0px 0px 5px 5px black;
-          box-shadow: 0px 0px 5px 5px black;
-  width: 97%;
+  -webkit-box-shadow: 0px 0px 15px 3px black;
+          box-shadow: 0px 0px 15px 3px black;
+  width: 100%;
   height: 5vh;
   bottom: 0px;
-  left: 2px;
+  margin: auto;
 }
 
 .rollRight, .rollLeft {
