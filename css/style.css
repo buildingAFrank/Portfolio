@@ -181,8 +181,8 @@
 }
 
 .hover-menu {
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#bebebe), color-stop(#8b8b8b), to(#4e4e4e));
-  background-image: linear-gradient(#bebebe, #8b8b8b, #4e4e4e);
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#bebebe), color-stop(#000000), to(#4e4e4e));
+  background-image: linear-gradient(#bebebe, #000000, #4e4e4e);
 }
 
 .hover-menu__bottom {
@@ -191,13 +191,13 @@
 }
 
 .activeMenu {
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#ffda61), color-stop(#fcb620), to(#d49100));
-  background-image: linear-gradient(#ffda61, #fcb620, #d49100);
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#ffda61), color-stop(#fc4c20), to(#d49100));
+  background-image: linear-gradient(#ffda61, #fc4c20, #d49100);
 }
 
 .activeMenu__bottom {
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#ffc524), color-stop(#ffd359), to(#b97f00));
-  background-image: linear-gradient(#ffc524, #ffd359, #b97f00);
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#ffc524), color-stop(#ff6c59), to(#b97f00));
+  background-image: linear-gradient(#ffc524, #ff6c59, #b97f00);
 }
 
 .activeMenuHover {
