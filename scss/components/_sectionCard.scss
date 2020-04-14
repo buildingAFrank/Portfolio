@@ -1,23 +1,110 @@
+
+/*format ordinateur*/
 .board{
-    height:80vh;
-    width:$board-width;
-    margin:auto 2.5vw;
+
+    height:$xl-board-height;
+    width:$xl-board-width;
+
     display:flex;
     justify-content:space-evenly;
     align-items:center;
+
+    margin:auto 2.5vw;
     overflow:hidden;
+    object-fit:contain;
+    box-sizing:border-box;
+
     .sectionContent{
-        border:1px solid #ffd359;
-        background-color:#2c2c2c;
+
         position:relative;
         left:0;
         width:0;
         height:0;
+        max-height:$xl-board-height - 1vh;
+
+        overflow-x:hidden;
+        overflow-y:auto;
+
+        border:1px solid #ffd359;
+        background-color:#2c2c2c;
+
+        &::-webkit-scrollbar{
+            width:20px;
+            height:200px;
+            margin-right:10px;
+            &-track{
+                background:none;
+                
+            }
+            &-thumb{
+                background:linear-gradient(#b97f00,#db9705,#f6dc67,#db9705,#b97f00);
+                height:50px;
+                border-radius:10px;
+                margin-top:150px;
+                
+            }
+        }
     }
 }
 
-@include FlipCard(flipperContainer, flipCard, rollRight, rollLeft, halfCard, topCard, bottomCard, $section-card-width, $section-card-height);
 
-.someClass{
-    color:yellow;
-}
+
+@include FlipCard(flipperContainer, flipCard, rollRight, rollLeft, halfCard, topCard, bottomCard, $xl-section-card-width, $xl-section-card-height);
+
+
+/*Tablette Xgrand format */
+@media screen and (max-width:1025px){
+
+    .board{
+        
+        height:$l-board-height;
+        width:$l-board-width;
+        margin:0 auto;
+        padding: 2vh 0;
+
+        .sectionContent{
+            max-height:$l-board-height - 4vh;
+        }
+
+        
+    }
+    @include FlipCard(flipperContainer, flipCard, rollRight, rollLeft, halfCard, topCard, bottomCard, $l-section-card-width, $l-section-card-height);
+    .halfCard{
+        font-size:4.5vw;
+    }
+    
+  }
+
+  /*Tablette format */
+@media screen and (max-width:770px){
+    .board{
+        height:$t-board-height;
+        width:$t-board-width;
+        margin:0 auto;
+        padding: 2vh 0;
+
+        .sectionContent{
+            max-height:$t-board-height - 4vh;
+        }
+    }
+    @include FlipCard(flipperContainer, flipCard, rollRight, rollLeft, halfCard, topCard, bottomCard, $m-section-card-width, $m-section-card-height);
+    .halfCard{
+        font-size:6vw;
+    }
+  }
+
+  @media screen and (max-width:550px){
+    .board{
+        height:$m-board-height;
+        width:$m-board-width;
+        margin:0 auto;
+        padding: 2vh 0;
+
+        .sectionContent{
+            max-height:$m-board-height - 4vh;
+        }
+    }
+    .flipperContainer{
+        display:none;
+    }
+  }

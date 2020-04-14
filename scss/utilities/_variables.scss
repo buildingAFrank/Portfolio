@@ -1,6 +1,54 @@
-$board-width:75vw;
-$section-card-space:(($board-width/14.6)/10)/2;
-$section-card-width:($board-width/14.6)-($section-card-space*2);
 
-$board-height:80vh;
-$section-card-height:$board-height/8;
+
+/*Global*/
+$main-bg-color:#4D4D4D;
+
+
+/*plein ecran*/
+/* navigation */
+$xl-nav-container-height:50vh;
+
+/* affichage contenu*/
+$xl-board-height:80vh;
+$xl-board-width:80vw;
+$xl-section-card-height:$xl-board-height/8;
+$xl-section-card-space:(($xl-board-width/15.8)/10)/2;
+$xl-section-card-width:($xl-board-width/15.8)-($xl-section-card-space*2);
+
+/*grande tablette*/
+
+/*navigation*/
+$l-nav-container-height:20vh;
+
+/*affichage contenu*/
+$l-board-height:75vh;
+$l-board-width:98vw;
+$l-section-card-height:$l-board-height/11;
+$l-section-card-space:(($l-board-width/14.6)/10)/2;
+$l-section-card-width:($l-board-width/14.6)-($l-section-card-space*2);
+
+/*tablette*/
+
+/*navigation*/
+$t-nav-container-height:15vh;
+
+/*affichage contenu*/
+$t-board-height:80vh;
+$t-board-width:98vw;
+$t-section-card-height:$t-board-height/11;
+$t-section-card-space:(($t-board-width/14.6)/10)/2;
+$t-section-card-width:($t-board-width/14.6)-($t-section-card-space*2);
+
+
+/*grande mobile*/
+
+/*navigation*/
+$m-nav-container-height:20vh;
+
+/*affichage contenu*/
+$m-board-height:70vh;
+$m-board-width:98vw;
+$m-section-card-height:$m-board-height/11;
+$m-section-card-space:(($m-board-width/14.6)/10)/2;
+$m-section-card-width:($m-board-width/14.6)-($m-section-card-space*2);
+

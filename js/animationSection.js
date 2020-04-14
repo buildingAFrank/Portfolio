@@ -1,28 +1,39 @@
-function TitreSection(data) {
+function TitreSection(data, id) {
   this.nom = data;
+  this.id = id;
   this.longueur = data.length;
   this.nomArray = data.split('');
 }
 
 function openSectionAnim(obj, card) {
-  placerLettre(obj, card, '__back', function() {
-    animateTitle(card, function() {
-      placerLettre(obj, card, '', function() {
-        clrAnim(card);
-        animateCardsOut(card, () => {
-          openSection();
+  if ($(window).width() < 551) {
+    openSection(obj);
+  } else {
+    placerLettre(obj, card, '__back', function() {
+      animateTitle(card, function() {
+        placerLettre(obj, card, '', function() {
+          clrAnim(card);
+          animateCardsOut(card, () => {
+            openSection(obj);
+          });
         });
       });
     });
-  });
+  }
 }
 
 function closeSectionAnim(obj, card) {
-  closeSection(() => {
-    animateCardsIn(card, () => {
-      openSectionAnim(obj, card);
+  if ($(window).width() < 551) {
+    closeSection(() => {
+      openSection(obj);
     });
-  });
+  } else {
+    closeSection(() => {
+      animateCardsIn(card, () => {
+        openSectionAnim(obj, card);
+      });
+    });
+  }
 }
 
 function placerLettre(obj, containersArray, enfant = '', cb) {
@@ -66,6 +77,7 @@ function animateTitle(cardContainers, cb) {
                 rotateX: '0deg',
                 duration: time
               },
+              500,
               () => {
                 if (index == 11) {
                   cb();
@@ -116,18 +128,24 @@ function animateCardsOut(cardContainers, cb) {
   });
 }
 
-function openSection() {
+function openSection(obj) {
   $('.board').attr('style', 'justify-content:flex-start;');
   $('.sectionContent')
     .show()
     .transition({
-      height: '79vh',
+      height: 'inherit',
       duration: 200
     })
-    .transition({
-      width: 'inherit',
-      duration: 300
-    });
+    .transition(
+      {
+        width: 'inherit',
+        duration: 300
+      },
+
+      function() {
+        chargerContenu(obj);
+      }
+    );
 }
 
 function animateCardsIn(cardContainers, cb) {
@@ -164,10 +182,106 @@ function closeSection(cb) {
       1000,
       () => {
         $('.sectionContent').toggle();
+        $('.sectionPrograms').html('');
+        $('.contentPresentation').html('');
         $('.board').attr('style', 'justify-content:space-evenly;');
-
-        console.log('call cb');
         cb();
       }
     );
+}
+
+function chargerContenu(obj) {
+  $.getJSON('./js/dataCall.json', function(data) {
+    console.log(obj.nom);
+    let programs = '';
+    let visual = '<div class="program-visual">';
+    let sectionContent = '';
+    let contentVisual = '<div class="content-visual">';
+
+    switch (obj.id) {
+      case 'home':
+        programs =
+          '<h2 style="font-size:3em; color:#bebebe">François-Xavier</h2>';
+        sectionContent =
+          contentVisual +
+          '<img src="/public/medias/' +
+          data[obj.id].avatar +
+          ' "></div>' +
+          '<p>' +
+          data[obj.id].content +
+          '</p>';
+        break;
+
+      case 'design':
+        $.each(data[obj.id].programs, (i, v) => {
+          programs +=
+            visual + '<img src="/public/medias/icons/' + v + ' "></div>';
+        });
+
+        $.each(data[obj.id].content, (i, v) => {
+          sectionContent +=
+            contentVisual +
+            '<img src="/public/medias/' +
+            data[obj.id].path +
+            v +
+            ' "></div>';
+        });
+        break;
+
+      case 'av':
+        $.each(data[obj.id].programs, (i, v) => {
+          programs +=
+            visual + '<img src="/public/medias/icons/' + v + ' "></div>';
+        });
+
+        $.each(data[obj.id].content, (i, v) => {
+          sectionContent +=
+            contentVisual +
+            '<video controls width="' +
+            $(window).width() / 4 +
+            '" height="' +
+            $(window).height() / 4 +
+            '"><source src="/public/medias/' +
+            data[obj.id].path +
+            v +
+            ' " type="video/mp4"></video></div>';
+        });
+        $.each(data[obj.id].urls, (i, v) => {
+          sectionContent +=
+            contentVisual +
+            '<iframe width="' +
+            $(window).width() / 4 +
+            '" height="' +
+            $(window).height() / 4 +
+            '" src="' +
+            v +
+            '" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>';
+        });
+        break;
+
+      case 'games':
+        $.each(data[obj.id].programs, (i, v) => {
+          programs +=
+            visual + '<img src="/public/medias/icons/' + v + ' "></div>';
+        });
+        break;
+
+      case 'prog':
+        $.each(data[obj.id].programs, (i, v) => {
+          programs +=
+            visual + '<img src="/public/medias/icons/' + v + ' "></div>';
+        });
+        break;
+      case 'Contact':
+        sectionContent +=
+          contentVisual +
+          '<img src="/public/medias/' +
+          data[obj.id].content +
+          ' "></div>';
+        break;
+    }
+
+    $('.sectionPrograms').html(programs);
+    $('.contentPresentation').html(sectionContent);
+  });
 }

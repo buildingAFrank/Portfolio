@@ -1,2 +1,6 @@
 # Local Netlify folder
 .netlify
+
+_config.yml
+V2
+scss

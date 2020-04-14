@@ -1,3 +1,5 @@
+//objet de l'evenement de la souris, une instance generer a chaque fois
+// avec des [GET,SET] pour suivre le l'evolution des animations associers aux evenements
 function EvToObj(ref) {
   this.ref = ref;
   this.$ref = $(ref.currentTarget);
@@ -7,6 +9,10 @@ function EvToObj(ref) {
   this.$topBack = this.$item.find('.tophalf__back');
   this.$bottom = this.$item.find('.bottomhalf');
   this.$bottomBack = this.$item.find('.bottomhalf__back');
+  this.menuName = this.$item
+    .find('.tophalf')
+    .children('span')
+    .html();
 }
 EvToObj.prototype.setAnimState = function(state) {
   return this.$item.attr('data-state', state);
@@ -29,12 +35,19 @@ EvToObj.prototype.getHoverState = function() {
   return this.$item.attr('data-hovering');
 };
 
-let activeMenu;
-const time = 150;
+//temps pour l'animation du flipper
+const time = 100;
+
+//les classes necessaires au cycle d'animation sur un item menu qui n'est pas actif
 const defaultClasses = ['', ''];
 const hoverClasses = ['hover-menu', 'hover-menu__bottom'];
+//les classes necessaires au cycle d'animation sur un item menu qui est actif
 const selectedClasses = ['activeMenu', 'activeMenu__bottom'];
 const selectedHoverClasses = ['activeMenuHover', 'activeMenuHover__bottom'];
+
+//garde en memoire l'item du menu qui est actif
+let activeMenu;
+
 /**
  * once the page is loaded, start registering events on nav elements
  */
@@ -51,6 +64,13 @@ $().ready(function() {
  * Analyse l'appel d'evenement et appel la fonction necessaire
  *
  * @param {called event} navEvent
+ *
+ * @case mouseenter set hover state=true, jouer animation hover
+ *
+ * @case mouseleave set hover state = false, jouer animation reset
+ *
+ * @case mouse click set selected state true/false, jouer animation selected
+ *
  */
 function stateCheck(navEvent) {
   //if menu is not active, make regular hover animation
@@ -90,7 +110,8 @@ function stateCheck(navEvent) {
     if (userEvent.getSelectedState() === 'FALSE') {
       userEvent.setSelectedState('TRUE');
       selectedHoverClassStart(userEvent);
-      let ObjChoisi = new TitreSection(userEvent.menuId);
+      let ObjChoisi = new TitreSection(userEvent.menuName, userEvent.menuId);
+      console.log(userEvent);
       //toute premiere selection de l'internaute
       if (activeMenu === undefined) {
         activeMenu = userEvent;
@@ -108,14 +129,12 @@ function stateCheck(navEvent) {
         openSectionAnim(ObjChoisi, $titleCard);
       }
     }
-    //choisi un item deja s/lectionner
-    else {
-      userEvent.setSelectedState('FALSE');
-      deselectedHoverClassStart(userEvent);
-    }
   }
 }
-/**animation initial a hovering et retour */
+
+/*mettre a jour l'etat de l'animation,  est appeler par StateCheck,
+ * appel la fonction de debut de l'animation, 
+ verifier les etats dans la fonction de retour et defini la prochaine etape */
 function flipMenuStart(ref, classes) {
   if (
     //animation is init or toinit, mouse is in hover and item not selected
@@ -132,6 +151,8 @@ function flipMenuStart(ref, classes) {
     });
   }
 }
+
+//debut du cycle d'animation appeler par flipMenuStart
 function animateToActive(ref, classes, cb) {
   const cssClass = classes[0];
   const cssClassBottom = classes[1];
@@ -163,6 +184,11 @@ function animateToActive(ref, classes, cb) {
     }
   );
 }
+
+/* met a jour l'etat de l'animation et appele la fonction qui debute l'animation de reinitialisation
+ appeler par flipMenuStart si la souris a quitter le bouton avant la fin de animateToActive
+ ou
+ est appeler par StateCheck si le curseur a quitter le bouton apres la fin de l'animation AnimateToActive*/
 function flipMenuReset(ref, classes) {
   if (ref.getAnimState() === 'ACTIVE' && ref.getHoverState() === 'FALSE') {
     ref.setAnimState('TOINIT');
@@ -175,6 +201,11 @@ function flipMenuReset(ref, classes) {
     flipMenuReset(ref, classes);
   }
 }
+
+/*debut du cycle d'animation de reinitialisation, 
+appeler par flipMenuReset si le bouton n'etait pas selectionner
+ou
+par flipSelectedMenuReset si le bouton etait actif mais qu'un autre bouton a ete selectionner par la suite*/
 function animateToInit(ref, classes, cb) {
   const cssClass = classes[0];
   const cssClassBottom = classes[1];
@@ -212,6 +243,10 @@ function animateToInit(ref, classes, cb) {
   );
 }
 
+/*appeler par stateCheck
+met a jour l'etat de l'animation
+prepare le bouton a jouer l'animation de selection
+appel flipMenuStart*/
 function selectedHoverClassStart(ref) {
   const { $top, $bottom, $topBack, $bottomBack } = ref;
   $bottom.addClass('hover-menu__bottom');
@@ -221,6 +256,12 @@ function selectedHoverClassStart(ref) {
   flipSelectedMenuStart(ref);
 }
 
+/**est appeler par selectedHoverClassStart si le bouton vient d'etre cliquer
+ * ou
+ * par stateCheck si le bouton etat deja selectionner mais que la souris n'etait pas sur le bouton
+ * met a jour l'etat de l'animation et appele la fonction animateToSelectedActive
+ * dans le retour verifie l'etat du hover et defini la prochaine etape
+ */
 function flipSelectedMenuStart(ref) {
   if (
     //animation is init or toinit, mouse is in hover and item not selected
@@ -230,9 +271,6 @@ function flipSelectedMenuStart(ref) {
   ) {
     ref.setAnimState('TOACTIVE');
     animateToSelectedActive(ref, function() {
-      //**************** */
-      //ajouter la fonction pour lanimation du titre de section ici
-      //***************************** */
       ref.$top.removeClass('hover-menu');
       ref.$topBack.removeClass('hover-menu');
       ref.$bottom
@@ -248,20 +286,25 @@ function flipSelectedMenuStart(ref) {
   }
 }
 
+/**appeler par flipSelectedMenuStart
+ * joue l'animation de selection
+ * met a jour l'etat d'animation
+ */
 function animateToSelectedActive(ref, cb) {
+  let { $top, $topBack, $bottomBack } = ref;
   // change color of top back panel
-  ref.$topBack.addClass([selectedClasses[0], selectedHoverClasses[0]]);
+  $topBack.addClass([selectedClasses[0], selectedHoverClasses[0]]);
   // start animation
-  ref.$top.transition(
+  $top.transition(
     {
       perspective: '1000px',
       rotateX: '-90deg',
       duration: time
     },
     function() {
-      ref.$top.addClass([selectedClasses[0], selectedHoverClasses[0]]);
+      $top.addClass([selectedClasses[0], selectedHoverClasses[0]]);
       // ANIMATE BOTTOM WHEN TOP IS DONE
-      ref.$bottomBack
+      $bottomBack
         .addClass([selectedClasses[1], selectedHoverClasses[1]])
         .transition(
           {
@@ -279,6 +322,12 @@ function animateToSelectedActive(ref, cb) {
   );
 }
 
+/* met a jour l'etat de l'animation et appele la fonction qui debute l'animation de reinitialisation
+ appeler par flipSelectedMenuStart si la souris a quitter le bouton avant la fin de animateToActive
+ ou
+ est appeler par StateCheck si le curseur a quitter le bouton apres la fin de l'animation AnimateSelectedToActive
+ ou
+ est appeler par flipDeselectedMenuStart si un autre bouton a ete activer*/
 function flipSelectedMenuReset(ref, classes) {
   if (ref.getAnimState() === 'ACTIVE' && ref.getHoverState() === 'FALSE') {
     ref.setAnimState('TOINIT');
@@ -292,6 +341,10 @@ function flipSelectedMenuReset(ref, classes) {
   }
 }
 
+/**appeler par stateCheck lorsqu'un deuxieme bouton du menu a ete clicker
+ * prepare le premier bouton activer a executer son animation de retour a l'etat intial non selectionner
+ * appele l'animation de reinitialisation du bouton du menu flipDeselectedMenuStart
+ */
 function deselectedHoverClassStart(ref) {
   const { $top, $bottom, $topBack, $bottomBack } = ref;
   if (ref.getSelectedState() === 'TRUE' || ref.getHoverState() === 'TRUE') {
@@ -304,6 +357,10 @@ function deselectedHoverClassStart(ref) {
   flipDeselectedMenuStart(ref);
 }
 
+/**appeler par deselectedHoverClassStart
+ * met ajout l'etat de l'animation
+ * appel l'animation animateToDeselected et ajuste les classes avant de definir la prochaine etape
+ */
 function flipDeselectedMenuStart(ref) {
   if (
     (ref.getAnimState() === 'INIT' || ref.getAnimState() === 'TOINIT') &&
@@ -338,6 +395,9 @@ function flipDeselectedMenuStart(ref) {
   }
 }
 
+/** appeler par flipDeselectedMenuStart
+ * execute l'animation de retour a l'etat initial
+ */
 function animateToDeselected(ref, cb) {
   // change color of top back panel
   if (ref.getSelectedState() === 'TRUE') {

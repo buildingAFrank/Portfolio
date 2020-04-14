@@ -1,0 +1,63 @@
+{
+    "nav":{
+
+        "menu-fr":[
+            "Accueil",
+            "Design",
+            "Audio-Visuel",
+            "Jeux",
+            "Programmation"
+        ],
+        "menu-en":[
+            "Home",
+            "Design",
+            "Audio&Video",
+            "Games",
+            "Programing"
+        ]
+    },
+    "home":{
+        "content":"Je suis un developpeur front-end. Je possède une excellente capacité de résolution de problème et une imagination qui a tendance à sortir des sentiers battus. J'adore découvrir et je ne recule devant rien, je suis passionné de la vie et adore innover.",
+        "avatar":"FX_500x500.jpg"   
+    
+    },
+    "design":{
+        "path":"design/",
+        "programs":["indesign.png","illustrator.png","photoshop.png"],
+        "content":[
+            "poster.png",
+            "enseigne.png",
+            "elZaz.png",
+            "zazOuv.png",
+            "affiche.png"                
+        ]
+    },
+    "av":{
+        "path":"av/",
+        "programs":["premier.png","aftereffects.png","davinci.png"],
+        "content":["Wx.mp4"],
+        "urls":["https://www.youtube.com/embed/kY1wFb1cRxw"]
+        
+    },
+    "games":{
+        "path":"jeux/",
+        "programs":["maya.png",
+        "unity.png",
+        "c-sharp.png",
+        "phaser.png"
+    ],
+    "content":[]
+    },
+    "prog":{
+        "path":"prototype/",
+        "programs":[
+            "html5.png",
+            "css-512.png",
+            "javascript.png",
+            "jquery.png",
+            "react.png",
+            "hubspot.png"
+        ],
+        "content":[]
+    }
+}

@@ -1,6 +1,51 @@
 /** Affichage de base**/
 
+/** ordinateur **/
+
 body{
-    background-color:#4D4D4D;
+  background-color:$main-bg-color;
+}
+main{
+    background-color:$main-bg-color;
     display:flex;
+    flex-flow:row nowrap;
+    height:95vh;
+    width:100%;
+    
   }
+footer{
+  display:flex;
+  justify-content:center;
+  height:5vh;
+  width:100%;
+  div{
+    width:4vh;
+    height:4vh;
+    margin:0 10px;
+    border-radius:50%;
+    text-align:center;
+    font-size:2.5vh;
+    background-color:#1d1d1d;
+    &:hover{
+      cursor:pointer;
+    }
+    i{
+      color:lightgrey;
+      position:relative;
+      transform-origin: 50% 50%;
+      top:0.75vh;
+
+    }
+  }
+}
+
+/*mobile a Tablette Xgrand format */
+@media screen and (max-width: 1025px) {
+  main{
+    flex-flow:row wrap;
+  }
+  footer{
+    justify-content:space-evenly;
+    align-items:center;
+  }
+}

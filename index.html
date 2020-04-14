@@ -3,15 +3,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous"/>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="prefetch" href="js/dataCall.json">
     <title>Portfolio-FX</title>
 </head>
 <body>
+    <main>
     <nav class="navigation">
         <ul class="nav-menu">
             <div class='item-menu item-menu__accueil' >
                 <!-- Accueil -->
-                <div class="menu-option" data-state="INIT" data-selected="FALSE" data-hovering="FALSE" id="accueil">
+                <div class="menu-option" data-state="INIT" data-selected="FALSE" data-hovering="FALSE" id="home">
                     <div class="halfCardMenu tophalf__back"><span>Accueil</span></div>
                     <div class="halfCardMenu bottomhalf"><span>Accueil</span></div>
                     <div class="halfCardMenu tophalf"><span>Accueil</span></div>
@@ -21,18 +24,7 @@
                 </div>
                 <div class="menuOverlay"></div>
             </div>
-            <div class='item-menu item-menu__apercu' >
-                <!-- Apercu -->
-                <div class="menu-option" data-state="INIT" data-selected="FALSE" data-hovering="FALSE" id="apercu">
-                    <div class="halfCardMenu tophalf__back"><span>Apercu</span></div>
-                    <div class="halfCardMenu bottomhalf"><span>Apercu</span></div>
-                    <div class="halfCardMenu tophalf"><span>Apercu</span></div>
-                    <div class="halfCardMenu bottomhalf__back"><span>Apercu</span></div>
-                    <div class="menuRoll__left"></div>
-                    <div class="menuRoll__right"></div>
-                </div>
-                <div class="menuOverlay"></div>
-            </div>
+            
             <div class='item-menu item-menu__design'>
                 <!-- Design -->
                 <div class="menu-option" data-state="INIT" data-selected="FALSE" data-hovering="FALSE" id="design">
@@ -47,7 +39,7 @@
             </div>
             <div class='item-menu item-menu__audio-visuel'>
                 <!-- Audio-visuel -->
-                <div class="menu-option" data-state="INIT" data-selected="FALSE" data-hovering="FALSE" id="audio-visuel">
+                <div class="menu-option" data-state="INIT" data-selected="FALSE" data-hovering="FALSE" id="av">
                     <div class="halfCardMenu tophalf__back"><span>Audio-Visuel</span></div>
                     <div class="halfCardMenu bottomhalf"><span>Audio-Visuel</span></div>
                     <div class="halfCardMenu tophalf"><span>Audio-Visuel</span></div>
@@ -59,7 +51,7 @@
             </div>
             <div class='item-menu item-menu__jeux'>
                 <!-- Jeux -->
-                <div class="menu-option" data-state="INIT" data-selected="FALSE" data-hovering="FALSE" id="jeux">
+                <div class="menu-option" data-state="INIT" data-selected="FALSE" data-hovering="FALSE" id="games">
                     <div class="halfCardMenu tophalf__back"><span>Jeux</span></div>
                     <div class="halfCardMenu bottomhalf"><span>Jeux</span></div>
                     <div class="halfCardMenu tophalf"><span>Jeux</span></div>
@@ -71,35 +63,11 @@
             </div>
             <div class='item-menu item-menu__prototype'>
                 <!-- Prototype -->
-                <div class="menu-option" data-state="INIT" data-selected="FALSE" data-hovering="FALSE" id="prototype">
-                    <div class="halfCardMenu tophalf__back"><span>Prototype</span></div>
-                    <div class="halfCardMenu bottomhalf"><span>Prototype</span></div>
-                    <div class="halfCardMenu tophalf"><span>Prototype</span></div>
-                    <div class="halfCardMenu bottomhalf__back"><span>Prototype</span></div>
-                    <div class="menuRoll__left"></div>
-                    <div class="menuRoll__right"></div>
-                </div>
-                <div class="menuOverlay"></div>
-            </div>
-            <div class='item-menu item-menu__contact'>
-                <!-- Contact -->
-                <div class="menu-option" data-state="INIT" data-selected="FALSE" data-hovering="FALSE" id="contact">
-                    <div class="halfCardMenu tophalf__back">
-                        <span>Contact</span>
-                    </div>
-                    <div class="halfCardMenu bottomhalf">
-                        <span>Contact</span>
-                    </div>
-                    <div class="halfCardMenu tophalf">
-                        <span>Contact</span>
-                        <div class="menuRoll__left menuRoll__left__top"></div>
-                        <div class="menuRoll__right menuRoll__right__top"></div>
-                    </div>
-                    <div class="halfCardMenu bottomhalf__back">
-                        <div class="menuRoll__left menuRoll__left__bottom"></div>
-                        <div class="menuRoll__right menuRoll__right__bottom"></div>
-                        <span>Contact</span>
-                    </div>
+                <div class="menu-option" data-state="INIT" data-selected="FALSE" data-hovering="FALSE" id="prog">
+                    <div class="halfCardMenu tophalf__back"><span>Programmation</span></div>
+                    <div class="halfCardMenu bottomhalf"><span>Programmation</span></div>
+                    <div class="halfCardMenu tophalf"><span>Programmation</span></div>
+                    <div class="halfCardMenu bottomhalf__back"><span>Programmation</span></div>
                     <div class="menuRoll__left"></div>
                     <div class="menuRoll__right"></div>
                 </div>
@@ -108,7 +76,12 @@
         </ul>
     </nav>
     <div class="board" data-section="FALSE">
-        <div class="sectionContent" style="display:none;"></div>
+        <div class="sectionContent" style="display:none;">
+            <div class="sectionPrograms"></div>
+
+                <div class="contentPresentation"></div>
+
+        </div>
         <div class="flipperContainer"> <!-- flip card -->
             <div class='flipCard'> <!-- flip card inner -->
                 <div class="halfCard topCard__back">
@@ -317,6 +290,28 @@
                 </div>
                 <div class='halfCard topCard'>
                     <span>!</span>
+                    <div class="rollLeft rollLeft__top"></div>
+                    <div class="rollRight rollRight__top"></div>
+                </div>
+                <div class="halfCard bottomCard__back">
+                    <div class="rollLeft rollLeft__bottom"></div>
+                    <div class="rollRight rollRight__bottom"></div>
+                    <span> </span>
+                </div>
+                <div class="rollLeft"></div>
+                <div class="rollRight"></div>
+            </div>
+        </div>
+        <div class="flipperContainer"> <!-- flip card -->
+            <div class='flipCard'> <!-- flip card inner -->
+                <div class="halfCard topCard__back">
+                    <span> </span>
+                </div>
+                <div class='halfCard bottomCard'>
+                    <span> </span>
+                </div>
+                <div class='halfCard topCard'>
+                    <span> </span>
                     <div class="rollLeft rollLeft__top"></div>
                     <div class="rollRight rollRight__top"></div>
                 </div>
@@ -374,11 +369,16 @@
             </div>
         </div>
     </div>
+</main>
     <footer>
+        <div class="socials"><a href=""><i class="far fa-envelope"></i></a></div>
+        <div class="socials"><a href="https://ca.linkedin.com/in/francois-xavier-emond-bourhis-16488a105" target="_blank"><i class="fab fa-linkedin-in"></a></i></div>
+        <div class="socials"><i class="fab fa-github"></i></div>
         <script type="text/javascript" src="js/jquery.js"></script>
         <script type="text/javascript" src="js/transit.js"></script>
         <script type="text/javascript" src="js/navigation.js"></script>
         <script type="text/javascript" src="js/animationSection.js"></script>
     </footer>
+
 </body>
 </html>
